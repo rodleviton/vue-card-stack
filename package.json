@@ -1,7 +1,7 @@
 {
   "name": "vue-card-stack",
   "version": "0.1.0",
-  "description": "Stackable, swipe-able Vue card component.",
+  "description": "Stackable, swipe-able, tweak-able Vue card component.",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",

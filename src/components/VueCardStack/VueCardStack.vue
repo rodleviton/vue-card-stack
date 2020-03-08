@@ -8,11 +8,14 @@
       v-for="(card, index) in stack"
       :key="card._id"
       :style="{
+        opacity: card.opacity,
         display: card.display,
         top: `${card.yPos}px`,
         width: `${card.width}px`,
         zIndex: card.zIndex,
-        transition: `all ${isDragging ? 0 : speed}s ease`,
+        transition: `transform ${
+          isDragging ? 0 : speed
+        }s ease, opacity ${speed}s ease`,
         transform: `
           scale(${card.scale}, ${card.scale}) 
           translate(${card.xPos}px, 0)
@@ -84,6 +87,9 @@ export default {
         ? this.maxVisibleCards
         : this.cards.length;
     },
+    _scaleMultiplier() {
+      return ((this.scaleMultiplier - 1) * -1) / 10;
+    },
     elementXPosOffset() {
       return this.$el.getBoundingClientRect().x;
     },
@@ -116,11 +122,13 @@ export default {
     },
     cardDefaults() {
       return this.cards.map((card, index) => {
-        const scale = index >= 1 ? 1 - this.scaleMultiplier * (index - 1) : 1;
+        const scale = index >= 1 ? 1 - this._scaleMultiplier * (index - 1) : 1;
+        const xPos = this.stackRestPoints[index];
 
         return {
-          display: index < this._maxVisibleCards ? "block" : "none",
-          xPos: this.stackRestPoints[index],
+          opacity: index < this._maxVisibleCards ? 1 : 0,
+          display: index < this._maxVisibleCards + 1 ? "block" : "none",
+          xPos: index < this._maxVisibleCards ? xPos : xPos + this.xPosOffset,
           yPos: this.paddingVertical,
           scale: scale > 0 ? scale : 0,
           width: this.cardWidth,
@@ -138,6 +146,10 @@ export default {
   methods: {
     init() {
       this.stackWidth = this.$el.clientWidth;
+
+      // move bottom card to top of stack (positioned offscreen)
+      this.cards.unshift(this.cards.pop());
+
       this.stack = this.cards.map((card, index) => {
         return {
           _id: new Date().getTime() + index,
@@ -204,7 +216,8 @@ export default {
         const scale = isActiveCard
           ? this.cardDefaults[index].scale
           : this.cardDefaults[index].scale +
-            (this.scaleMultiplier / (this.cardWidth + this.paddingHorizontal)) *
+            (this._scaleMultiplier /
+              (this.cardWidth + this.paddingHorizontal)) *
               activeCardOffset;
 
         return {
