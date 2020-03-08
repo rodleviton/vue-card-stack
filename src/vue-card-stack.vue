@@ -8,7 +8,15 @@ export default {
     },
     cardWidth: {
       type: Number,
-      default: () => 250
+      default: () => 300
+    },
+    cardHeight: {
+      type: Number,
+      default: () => 400
+    },
+    stackWidth: {
+      type: Number,
+      default: () => null
     },
     sensitivity: {
       type: Number,
@@ -37,7 +45,6 @@ export default {
   },
   data() {
     return {
-      stackWidth: 0,
       stack: [],
       activeCardIndex: 1,
       isDragging: false,
@@ -53,6 +60,9 @@ export default {
     document.addEventListener(this.touchEndEvent, this.onTouchEnd);
   },
   computed: {
+    _stackWidth() {
+      return this.stackWidth || this.cardWidth + (this.paddingHorizontal * 2);
+    },
     _maxVisibleCards() {
       return this.cards.length > this.maxVisibleCards
         ? this.maxVisibleCards
@@ -81,12 +91,12 @@ export default {
         const offset = this.xPosOffset * (index - 1);
 
         if (!index) {
-          return this.stackWidth + this.paddingHorizontal;
+          return this._stackWidth + this.paddingHorizontal;
         } else if (index === 1) {
-          return this.stackWidth - this.cardWidth - this.paddingHorizontal;
+          return this._stackWidth - this.cardWidth - this.paddingHorizontal;
         } else {
           return (
-            this.stackWidth - this.cardWidth - offset - this.paddingHorizontal
+            this._stackWidth - this.cardWidth - offset - this.paddingHorizontal
           );
         }
       });
@@ -103,21 +113,20 @@ export default {
           yPos: this.paddingVertical,
           scale: scale > 0 ? scale : 0,
           width: this.cardWidth,
+          height: this.cardHeight,
           zIndex: this.cards.length - index
         };
       });
     },
     xPosOffset() {
       return (
-        (this.stackWidth - this.paddingHorizontal * 2 - this.cardWidth) /
+        (this._stackWidth - this.paddingHorizontal * 2 - this.cardWidth) /
         (this._maxVisibleCards - 2)
       );
     }
   },
   methods: {
     init() {
-      this.stackWidth = this.$el.clientWidth;
-
       // move bottom card to top of stack (positioned offscreen)
       this.cards.unshift(this.cards.pop());
 
@@ -131,7 +140,6 @@ export default {
     },
     rebuild() {
       this.$nextTick(() => {
-        this.stackWidth = this.$el.clientWidth;
         this.stack = this.stack.map((card, index) => {
           return {
             ...card,
@@ -233,7 +241,7 @@ export default {
 <template>
   <div
     class="vue-card-stack__stack-wrapper"
-    :style="{ 'padding-bottom': `${paddingVertical * 2}px` }"
+    :style="{ 'padding-bottom': `${paddingVertical * 2}px`, height: `${cardHeight}px`, width: `${_stackWidth}px` }"
   >
     <div
       class="vue-card-stack__card-wrapper"
@@ -244,6 +252,7 @@ export default {
         display: card.display,
         top: `${card.yPos}px`,
         width: `${card.width}px`,
+        height: `${card.height}px`,
         zIndex: card.zIndex,
         transition: `transform ${
           isDragging ? 0 : speed

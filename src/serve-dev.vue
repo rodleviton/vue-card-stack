@@ -1,26 +1,24 @@
 <template>
   <div>
-    <div class="card-stack-wrapper" :style="{ width: `${stackWidth}px` }">
-      <VueCardStack
-        :cards="cards"
-        :cardWidth="287"
-        :maxVisibleCards="parseInt(maxVisibleCards)"
-        :scaleMultiplier="parseFloat(scaleMultiplier)"
-        class="card-stack"
-        ref="stack"
-      >
-        <template v-slot:card="{ card }">
-          <div
-            class="card"
-            :style="{
-              background: card.color,
+    <VueCardStack
+      :cards="cards"
+      :cardWidth="300"
+      :cardHeight="460"
+      :stackWidth="stackWidth"
+      :maxVisibleCards="parseInt(maxVisibleCards)"
+      :scaleMultiplier="parseFloat(scaleMultiplier)"
+      ref="stack"
+    >
+      <template v-slot:card="{ card }">
+        <div
+          class="card"
+          :style="{
+              background: card.background,
               boxShadow: cardShadows[card.$index]
             }"
-          ></div>
-        </template>
-      </VueCardStack>
-    </div>
-
+        ></div>
+      </template>
+    </VueCardStack>
     <div>
       <div class="slide__container">
         maxVisibleCards: {{ maxVisibleCards }}
@@ -60,7 +58,6 @@
 import Vue from "vue";
 import VueCardStack from "@/vue-card-stack.vue";
 import { debounce } from "@/utils/debounce";
-import data from "@/data";
 
 export default Vue.extend({
   name: "ServeDev",
@@ -71,19 +68,22 @@ export default Vue.extend({
     return {
       maxVisibleCards: 12,
       containerWidth: 460,
-      scaleMultiplier: 0.95
+      scaleMultiplier: 0.95,
+      cards: [
+        { background: "#00659d" },
+        { background: "#00abbc" },
+        { background: "#e2c58a" },
+        { background: "#fc8890" },
+        { background: "#b35d7f" },
+        { background: "#00659d" },
+        { background: "#00abbc" },
+        { background: "#e2c58a" },
+        { background: "#fc8890" },
+        { background: "#b35d7f" }
+      ]
     };
   },
   computed: {
-    cards() {
-      return [
-        { color: "#00659d" },
-        { color: "#00abbc" },
-        { color: "#e2c58a" },
-        { color: "#fc8890" },
-        { color: "#b35d7f" }
-      ];
-    },
     stackWidth: {
       get() {
         return this.containerWidth;
@@ -120,32 +120,8 @@ body {
 </style>
 
 <style scoped>
-.card-stack-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  width: 360px;
-  height: 500px;
-}
-
-.card-stack {
-  width: 100%;
-  height: 460px;
-  padding-bottom: 60px !important;
-}
-
 .card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f3f3f3;
-  overflow: hidden;
-  color: #e3e3e3;
-  font-size: 22px;
-  width: 240px;
-  height: 360px;
+  height: 100%;
   border-radius: 8px;
-  box-shadow: -1px 10px 10px 0px rgba(0, 0, 0, 0.05);
 }
 </style>
