@@ -7,7 +7,11 @@
 ## Install
 
 ```bash
-npm i -S vue-easy-slider
+npm install vue-card-stack
+
+or
+
+yarn add vue-card-stack
 ```
 
 # License
