@@ -1,35 +1,5 @@
 <template>
   <div>
-    <div class="slide__container">
-      maxVisibleCards: {{ maxVisibleCards }}
-      <input
-        type="range"
-        min="4"
-        max="30"
-        value="6"
-        class="slider"
-        v-model="maxVisibleCards"
-      />
-    </div>
-    <div class="slide__container">
-      stackWidth: {{ stackWidth }}
-      <input
-        type="range"
-        min="330"
-        max="1600"
-        class="slider"
-        v-model="stackWidth"
-      />
-    </div>
-    <div class="slide__container">
-      scaleMultiplier: {{ scaleMultiplier }}
-      <input
-        style="width: 100px; height 40px;"
-        type="text"
-        class="slider"
-        v-model="scaleMultiplier"
-      />
-    </div>
     <div class="card-stack-wrapper" :style="{ width: `${stackWidth}px` }">
       <VueCardStack
         :cards="cards"
@@ -43,24 +13,57 @@
           <div
             class="card"
             :style="{
+              background: card.color,
               boxShadow: cardShadows[card.$index]
             }"
-          >
-            <img :src="card.cover" draggable="false" />
-          </div>
+          ></div>
         </template>
       </VueCardStack>
+    </div>
+
+    <div>
+      <div class="slide__container">
+        maxVisibleCards: {{ maxVisibleCards }}
+        <input
+          type="range"
+          min="4"
+          max="30"
+          value="6"
+          class="slider"
+          v-model="maxVisibleCards"
+        />
+      </div>
+      <div class="slide__container">
+        stackWidth: {{ stackWidth }}
+        <input
+          type="range"
+          min="330"
+          max="1600"
+          class="slider"
+          v-model="stackWidth"
+        />
+      </div>
+      <div class="slide__container">
+        scaleMultiplier: {{ scaleMultiplier }}
+        <input
+          style="width: 100px; height 40px;"
+          type="text"
+          class="slider"
+          v-model="scaleMultiplier"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { VueCardStack } from "./components/VueCardStack";
-import { debounce } from "./utils/debounce";
-import data from "./data";
+import Vue from "vue";
+import VueCardStack from "@/vue-card-stack.vue";
+import { debounce } from "@/utils/debounce";
+import data from "@/data";
 
-export default {
-  name: "App",
+export default Vue.extend({
+  name: "ServeDev",
   components: {
     VueCardStack
   },
@@ -73,7 +76,13 @@ export default {
   },
   computed: {
     cards() {
-      return data;
+      return [
+        { color: "#00659d" },
+        { color: "#00abbc" },
+        { color: "#e2c58a" },
+        { color: "#fc8890" },
+        { color: "#b35d7f" }
+      ];
     },
     stackWidth: {
       get() {
@@ -93,10 +102,10 @@ export default {
       });
     }
   }
-};
+});
 </script>
 
-<style lang="scss">
+<style>
 html {
   min-height: 100%;
 }
@@ -110,7 +119,7 @@ body {
 }
 </style>
 
-<style scoped lang="scss">
+<style scoped>
 .card-stack-wrapper {
   display: flex;
   align-items: center;
@@ -134,14 +143,9 @@ body {
   overflow: hidden;
   color: #e3e3e3;
   font-size: 22px;
-  width: 100%;
-  height: 100%;
+  width: 240px;
+  height: 360px;
   border-radius: 8px;
   box-shadow: -1px 10px 10px 0px rgba(0, 0, 0, 0.05);
-
-  > img {
-    width: 100%;
-    user-select: none;
-  }
 }
 </style>

@@ -1,32 +1,3 @@
-<template>
-  <div
-    class="vue-card-stack__stack-wrapper"
-    :style="{ 'padding-bottom': `${paddingVertical * 2}px` }"
-  >
-    <div
-      class="vue-card-stack__card-wrapper"
-      v-for="(card, index) in stack"
-      :key="card._id"
-      :style="{
-        opacity: card.opacity,
-        display: card.display,
-        top: `${card.yPos}px`,
-        width: `${card.width}px`,
-        zIndex: card.zIndex,
-        transition: `transform ${
-          isDragging ? 0 : speed
-        }s ease, opacity ${speed}s ease`,
-        transform: `
-          scale(${card.scale}, ${card.scale}) 
-          translate(${card.xPos}px, 0)
-        `
-      }"
-    >
-      <slot v-bind:card="{ ...card, $index: index }" name="card"></slot>
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   name: "VueCardStack",
@@ -85,7 +56,7 @@ export default {
     _maxVisibleCards() {
       return this.cards.length > this.maxVisibleCards
         ? this.maxVisibleCards
-        : this.cards.length;
+        : this.cards.length - 1;
     },
     _scaleMultiplier() {
       return ((this.scaleMultiplier - 1) * -1) / 10;
@@ -259,7 +230,36 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<template>
+  <div
+    class="vue-card-stack__stack-wrapper"
+    :style="{ 'padding-bottom': `${paddingVertical * 2}px` }"
+  >
+    <div
+      class="vue-card-stack__card-wrapper"
+      v-for="(card, index) in stack"
+      :key="card._id"
+      :style="{
+        opacity: card.opacity,
+        display: card.display,
+        top: `${card.yPos}px`,
+        width: `${card.width}px`,
+        zIndex: card.zIndex,
+        transition: `transform ${
+          isDragging ? 0 : speed
+        }s ease, opacity ${speed}s ease`,
+        transform: `
+          scale(${card.scale}, ${card.scale}) 
+          translate(${card.xPos}px, 0)
+        `
+      }"
+    >
+      <slot v-bind:card="{ ...card, $index: index }" name="card"></slot>
+    </div>
+  </div>
+</template>
+
+<style scoped>
 .vue-card-stack__stack-wrapper {
   position: relative;
   overflow: hidden;
