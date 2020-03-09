@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
     <VueCardStack
       :cards="cards"
       :cardWidth="300"
       :cardHeight="460"
-      :stackWidth="stackWidth"
+      stackWidth="100%"
       :maxVisibleCards="parseInt(maxVisibleCards)"
       :scaleMultiplier="parseFloat(scaleMultiplier)"
       ref="stack"

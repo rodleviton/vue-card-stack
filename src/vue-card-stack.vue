@@ -1,4 +1,6 @@
 <script>
+import { debounce } from "@/utils/debounce";
+
 export default {
   name: "VueCardStack",
   props: {
@@ -15,7 +17,7 @@ export default {
       default: () => 400
     },
     stackWidth: {
-      type: Number,
+      type: [Number, String],
       default: () => null
     },
     sensitivity: {
@@ -46,6 +48,7 @@ export default {
   data() {
     return {
       stack: [],
+      width: 0,
       activeCardIndex: 1,
       isDragging: false,
       dragStartX: 0,
@@ -55,13 +58,20 @@ export default {
   },
   mounted() {
     this.init();
-
+    window.addEventListener("resize", this.handleResize)
     this.$el.addEventListener(this.touchStartEvent, this.onTouchStart);
     document.addEventListener(this.touchEndEvent, this.onTouchEnd);
   },
   computed: {
     _stackWidth() {
-      return this.stackWidth || this.cardWidth + (this.paddingHorizontal * 2);
+      if (!this.stackWidth) {
+        return this.cardWidth + (this.paddingHorizontal * 2);
+      } else if (typeof this.stackWidth === 'number') {
+        return this.stackWidth
+      }
+
+      
+      return this.width || this.$el.clientWidth
     },
     _maxVisibleCards() {
       return this.cards.length > this.maxVisibleCards
@@ -70,6 +80,15 @@ export default {
     },
     _scaleMultiplier() {
       return ((this.scaleMultiplier - 1) * -1) / 10;
+    },
+    containerWidth() {
+      if (!this.stackWidth) {
+        return `${this.cardWidth + (this.paddingHorizontal * 2)}px`;
+      } else if (typeof this.stackWidth === 'number') {
+        return `${this.stackWidth}px`
+      }
+      
+      return this.stackWidth
     },
     elementXPosOffset() {
       return this.$el.getBoundingClientRect().x;
@@ -107,7 +126,7 @@ export default {
         const xPos = this.stackRestPoints[index];
 
         return {
-          opacity: index < this._maxVisibleCards ? 1 : 0,
+          opacity: index > 0 && index < this._maxVisibleCards ? 1 : 0,
           display: index < this._maxVisibleCards + 1 ? "block" : "none",
           xPos: index < this._maxVisibleCards ? xPos : xPos + this.xPosOffset,
           yPos: this.paddingVertical,
@@ -148,6 +167,10 @@ export default {
         });
       });
     },
+    handleResize: debounce(function() {
+      this.width = this.$el.clientWidth
+      this.rebuild()
+    }, 250),
     updateStack() {
       const activeCard = this.stack[this.activeCardIndex];
       const activeCardRestPoint = this.stackRestPoints[this.activeCardIndex];
@@ -203,7 +226,8 @@ export default {
           ...card,
           ...this.cardDefaults[index],
           xPos,
-          scale
+          scale,
+          opacity: index === 0 && !this.isDraggingRight ? 1 : this.cardDefaults[index].opacity 
         };
       });
     },
@@ -241,7 +265,7 @@ export default {
 <template>
   <div
     class="vue-card-stack__stack-wrapper"
-    :style="{ 'padding-bottom': `${paddingVertical * 2}px`, height: `${cardHeight}px`, width: `${_stackWidth}px` }"
+    :style="{ 'padding-bottom': `${paddingVertical * 2}px`, height: `${cardHeight}px`, width: containerWidth }"
   >
     <div
       class="vue-card-stack__card-wrapper"
