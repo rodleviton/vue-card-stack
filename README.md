@@ -1,7 +1,7 @@
 # vue-card-stack
 
 ![CI](https://github.com/rodleviton/vue-card-stack/workflows/CI/badge.svg)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rodleviton/vue-card-stack/blob/master/LICENCE)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rodleviton/vue-card-stack/blob/master/LICENSE)
 
 
 ## Install

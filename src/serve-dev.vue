@@ -2,21 +2,16 @@
   <div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
     <VueCardStack
       :cards="cards"
-      :cardWidth="300"
-      :cardHeight="460"
-      stackWidth="100%"
-      :maxVisibleCards="parseInt(maxVisibleCards)"
-      :scaleMultiplier="parseFloat(scaleMultiplier)"
+      :card-width="300"
+      :card-height="460"
+      :stack-width="stackWidth"
+      :max-visible-cards="parseInt(maxVisibleCards)"
+      :scale-multiplier="parseFloat(scaleMultiplier)"
+      :on-move="onMove"
       ref="stack"
     >
       <template v-slot:card="{ card }">
-        <div
-          class="card"
-          :style="{
-              background: card.background,
-              boxShadow: cardShadows[card.$index]
-            }"
-        ></div>
+        <div class="card" :style="{ background: card.background }"></div>
       </template>
     </VueCardStack>
     <div>
@@ -92,14 +87,11 @@ export default Vue.extend({
         this.containerWidth = parseInt(val);
         this.$refs.stack.rebuild();
       }, 100)
-    },
-    cardShadows() {
-      return this.cards.map((_, index) => {
-        const y = 10 - 10 * index * (1 / this.maxVisibleCards);
-        const x = 10 - 10 * index * (1 / this.maxVisibleCards);
-
-        return `-1px ${x}px ${y}px 0px rgba(0, 0, 0, 0.05)`;
-      });
+    }
+  },
+  methods: {
+    onMove(val) {
+      console.log(val)
     }
   }
 });

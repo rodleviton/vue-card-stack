@@ -43,6 +43,10 @@ export default {
     paddingVertical: {
       type: Number,
       default: () => 20
+    },
+    onMove: {
+      type: Function,
+      default: null
     }
   },
   data() {
@@ -178,6 +182,10 @@ export default {
       const minDistanceToTravel =
         (this.cardWidth + this.paddingHorizontal) / this.sensitivity;
 
+      if (this.onMove) {
+        this.onMove(0)
+      }
+
       if (this.isDraggingRight) {
         if (distanceTravelled > minDistanceToTravel) {
           const cardToMoveToBottomOfStack = this.stack.shift();
@@ -200,6 +208,10 @@ export default {
     moveStack(dragXPos) {
       const activeCardOffset = dragXPos - this.dragStartX;
 
+      if (this.onMove) {
+        this.onMove(activeCardOffset / (this.cardWidth + this.paddingHorizontal))
+      }
+
       if (this.isDraggingRight) {
         this.activeCardIndex = 1;
       } else {
@@ -208,7 +220,6 @@ export default {
 
       this.stack = this.stack.map((card, index) => {
         const isActiveCard = index === this.activeCardIndex;
-
         const xPos = isActiveCard
           ? this.cardDefaults[index].xPos + activeCardOffset
           : this.cardDefaults[index].xPos +
