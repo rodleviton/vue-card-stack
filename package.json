@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "license": "MIT",
   "author": "Rod Leviton <rod@rodleviton.com>",
-  "description": "Stackable, swipe-able, tweak-able Vue card component.",
+  "description": "Stackable, swipeable, tweakable Vue card component.",
   "main": "dist/vue-card-stack.ssr.js",
   "browser": "dist/vue-card-stack.esm.js",
   "module": "dist/vue-card-stack.esm.js",
