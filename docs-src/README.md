@@ -78,8 +78,9 @@ export default {
 | **paddingHorizontal** | `Number`        |              `20`               | A gutter size in pixels that will be applied to left and right hand side of card stack. |
 | **paddingVertical**   | `Number`        |              `20`               | A gutter size in pixels that will be applied to top and bottom of card stack.           |
 
-
-> To help get you up and running quickly, most props are optional. To get started, simply provide an `Array` of cards to the component.
+::: tip
+To help get you up and running quickly, most props are optional. To get started, simply provide an `Array` of cards to the component.
+:::
 
 ### Events
 
