@@ -1,9 +1,11 @@
 <template>
-  <vue-card-stack :cards="cards" :stack-width="360" :card-width="280">
-    <template v-slot:card="{ card }">
-      <div style="width: 100%; height: 100%; border-radius: 8px;" :style="{ background: card.background }"></div>
-    </template>
-  </vue-card-stack>
+  <div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+    <vue-card-stack :cards="cards" :stack-width="360" :card-width="280">
+      <template v-slot:card="{ card }">
+        <div style="width: 100%; height: 100%; border-radius: 8px;" :style="{ background: card.background }"></div>
+      </template>
+    </vue-card-stack>
+  </div>
 </template>
 
 <script>

@@ -22,7 +22,7 @@ export default {
     },
     sensitivity: {
       type: Number,
-      default: () => 4
+      default: () => 0.25
     },
     maxVisibleCards: {
       type: Number,
@@ -30,7 +30,7 @@ export default {
     },
     scaleMultiplier: {
       type: Number,
-      default: () => 0.05
+      default: () => 0.5 // last visible card will be 50% scale
     },
     speed: {
       type: Number,
@@ -43,10 +43,6 @@ export default {
     paddingVertical: {
       type: Number,
       default: () => 20
-    },
-    onMove: {
-      type: Function,
-      default: null
     }
   },
   data() {
@@ -74,7 +70,6 @@ export default {
         return this.stackWidth
       }
 
-      
       return this.width || this.$el.clientWidth
     },
     _maxVisibleCards() {
@@ -180,11 +175,10 @@ export default {
       const activeCardRestPoint = this.stackRestPoints[this.activeCardIndex];
       const distanceTravelled = activeCard.xPos - activeCardRestPoint;
       const minDistanceToTravel =
-        (this.cardWidth + this.paddingHorizontal) / this.sensitivity;
+        (this.cardWidth + this.paddingHorizontal) / (1 / this.sensitivity);
 
-      if (this.onMove) {
-        this.onMove(0)
-      }
+
+      this.$emit('move', 0)
 
       if (this.isDraggingRight) {
         if (distanceTravelled > minDistanceToTravel) {
@@ -208,9 +202,7 @@ export default {
     moveStack(dragXPos) {
       const activeCardOffset = dragXPos - this.dragStartX;
 
-      if (this.onMove) {
-        this.onMove(activeCardOffset / (this.cardWidth + this.paddingHorizontal))
-      }
+      this.$emit('move', activeCardOffset / (this.cardWidth + this.paddingHorizontal))
 
       if (this.isDraggingRight) {
         this.activeCardIndex = 1;

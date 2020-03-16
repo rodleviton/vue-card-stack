@@ -50,11 +50,11 @@
 
 <script>
 import Vue from "vue";
-import VueCardStack from "@/vue-card-stack.vue";
-import { debounce } from "@/utils/debounce";
+import VueCardStack from "../../../src/vue-card-stack";
+import { debounce } from "../../../src/utils/debounce";
 
 export default Vue.extend({
-  name: "ServeDev",
+  name: "InteractiveDemo",
   components: {
     VueCardStack
   },
@@ -110,23 +110,6 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style>
-html {
-  min-height: 100%;
-}
-
-body {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-    font-size: 16px;
-    color: #2c3e50;
-}
-</style>
 
 <style scoped>
 .card {
