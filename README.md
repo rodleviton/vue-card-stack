@@ -79,6 +79,10 @@ export default {
 | :------- | :--------------------------------- |
 | **card** | Slot for individual card in stack. |
 
-# License
+## Docs
+
+See the full api docs and examples here: https://github.com/rodleviton/vue-card-stack
+
+## License
 
 MIT
