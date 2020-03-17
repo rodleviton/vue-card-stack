@@ -268,7 +268,7 @@ export default {
 <template>
   <div
     class="vue-card-stack__stack-wrapper"
-    :style="{ 'padding-bottom': `${paddingVertical * 2}px`, height: `${cardHeight}px`, width: containerWidth }"
+    :style="{ height: `${cardHeight + (paddingVertical * 2)}px`, width: containerWidth }"
   >
     <div
       class="vue-card-stack__card-wrapper"
