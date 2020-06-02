@@ -83,6 +83,9 @@ export default {
 
 See the full api docs and examples here: https://rodleviton.github.io/vue-card-stack/
 
+## Examples
+https://reactivepixels.com/rodleviton/pixels/EXi4DocHUfMi3FHpnLT7
+
 ## License
 
 MIT
