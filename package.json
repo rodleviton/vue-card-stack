@@ -1,6 +1,6 @@
 {
   "name": "vue-card-stack",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "MIT",
   "author": "Rod Leviton <rod@rodleviton.com>",
   "description": "Stackable, swipeable, tweakable Vue card component.",
