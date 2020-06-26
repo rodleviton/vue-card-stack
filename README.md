@@ -58,7 +58,7 @@ export default {
 | **cards**             | `Array`         |              `[]`               | Array of cards to render stack.                                                                    |
 | **cardWidth**         | `Number`        |              `300`              | Width of card in pixels.                                                                           |
 | **cardHeight**        | `Number`        |              `400`              | Height of card in pixels.                                                                          |
-| **stackWidth**        | `Number|String` | `cardWidth + paddingHorizontal` | Width of card stack in pixels or as a percentage (responsive).                                     |
+| **stackWidth**        | `[Number:String]` | `cardWidth + paddingHorizontal` | Width of card stack in pixels or as a percentage (responsive).                                     |
 | **sensitivity**       | `Number`        |             `0.25`              | Distance card must travel as percentage of `cardWidth` + `paddingHorizontal`.                      |
 | **maxVisibleCards**   | `Number`        |              `10`               | Number of cards that will be visible at any one time.                                              |
 | **scaleMultiplier**   | `Number`        |             `0.75`              | A number between `0` and `1` that determines how much a card scales as it moved through the stack. |
