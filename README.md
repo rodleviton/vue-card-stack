@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/rodleviton/vue-card-stack/" target="_blank">
-    <img width="400" alt="Vue Card Stack Logo" src="https://github.com/rodleviton/vue-card-stack/blob/next/vue-card-stack.png">
+    <img width="300" alt="Vue Card Stack Logo" src="https://github.com/rodleviton/vue-card-stack/blob/next/vue-card-stack.png">
   </a>
 </p>
 
