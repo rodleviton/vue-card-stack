@@ -197,15 +197,15 @@ body {
 }
 
 .chevron {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	height: 0.45em;
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  height: 0.45em;
   width: 0.45em;
 }
 
 .chevron.left {
-	transform: rotate(-135deg);
+  transform: rotate(-135deg);
   margin-left: 4px;
 }
 
