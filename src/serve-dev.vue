@@ -9,6 +9,19 @@
       :scale-multiplier="parseFloat(scaleMultiplier)"
       ref="stack"
     >
+
+      <template v-slot:nav="{ activeCardIndex, onNext, onPrevious }">
+        <nav class="nav">
+          <div class="counter">{{activeCardIndex + 1}}/{{cards.length}}</div>
+          <button v-on:click="onPrevious" class="button">
+            <span class="chevron left"></span>
+          </button>
+          <button v-on:click="onNext" class="button">
+            <span class="chevron right"></span>
+          </button>
+        </nav>
+      </template>
+
       <template v-slot:card="{ card }">
         <div class="card" :style="{ background: card.background }"></div>
       </template>
@@ -38,7 +51,7 @@
       <div class="slide__container">
         <label>scaleMultiplier: <span>{{ scaleMultiplier }}</span></label>
         <input
-          style="width: 100px; height 40px;"
+          style="width: 100px; height: 40px;"
           type="number"
           step="0.05" min="0" max="1"
           v-model="scaleMultiplier"
@@ -122,9 +135,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-    font-size: 16px;
-    color: #2c3e50;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 16px;
+  color: #2c3e50;
 }
 </style>
 
@@ -132,6 +145,73 @@ body {
 .card {
   height: 100%;
   border-radius: 8px;
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.nav .counter {
+  font-weight: 600;
+  font-size: 12px;
+  background: #3eaf7c;
+  padding: 4px;
+  border-radius: 4px;
+  color: white;
+}
+
+.nav .button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid #ccc;
+  color: #2d2d2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav .button:first-of-type {
+  left: 0;
+}
+
+.nav .button:last-of-type {
+  right: 0;
+}
+
+.nav .button:hover {
+  cursor: pointer;
+}
+
+.nav .button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(0,132,255,.5);
+}
+
+.chevron {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  height: 0.45em;
+  width: 0.45em;
+}
+
+.chevron.left {
+  transform: rotate(-135deg);
+  margin-left: 4px;
+}
+
+.chevron.right {
+  transform: rotate(45deg);
+  margin-right: 4px;
 }
 
 .controls {

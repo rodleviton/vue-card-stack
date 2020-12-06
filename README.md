@@ -82,9 +82,10 @@ export default {
 
 ### Slots
 
-| Name     | Description                        |
-| :------- | :--------------------------------- |
-| **card** | Slot for individual card in stack. |
+| Name     | Description                                                                                                                                                                                                                        |
+| :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **card** | Slot for individual card in stack.                                                                                                                                                                                                 |
+| **nav**  | Slot for controlling navigation of card stack.<ul><li>`activeCardIndex` - returrns current card index.</li><li>`onNext` - method to move forwards though stack.<li>`onPrevious` - method to move backwards though stack.</li></ul> |
 
 ## Docs
 

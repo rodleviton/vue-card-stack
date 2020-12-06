@@ -141,6 +141,13 @@ export default {
         (this._stackWidth - this.paddingHorizontal * 2 - this.cardWidth) /
         (this._maxVisibleCards - 2)
       );
+    },
+    originalActiveCardIndex() {
+      if (this.stack[this.activeCardIndex]) {
+        return this.stack[this.activeCardIndex]._index
+      }
+
+      return 0
     }
   },
   methods: {
@@ -151,6 +158,7 @@ export default {
       this.stack = this.cards.map((card, index) => {
         return {
           _id: new Date().getTime() + index,
+          _index: index,
           ...card,
           ...this.cardDefaults[index]
         };
@@ -170,6 +178,16 @@ export default {
       this.width = this.$el.clientWidth
       this.rebuild()
     }, 250),
+    onNext() {
+      const cardToMoveToBottomOfStack = this.stack.shift();
+      this.stack.push(cardToMoveToBottomOfStack);
+      this.rebuild();
+    },
+    onPrevious() {
+      const cardToMoveToTopOfStack = this.stack.pop();
+      this.stack.unshift(cardToMoveToTopOfStack);
+      this.rebuild();
+    },
     updateStack() {
       const activeCard = this.stack[this.activeCardIndex];
       const activeCardRestPoint = this.stackRestPoints[this.activeCardIndex];
@@ -182,22 +200,13 @@ export default {
 
       if (this.isDraggingRight) {
         if (distanceTravelled > minDistanceToTravel) {
-          const cardToMoveToBottomOfStack = this.stack.shift();
-          this.stack.push(cardToMoveToBottomOfStack);
+          this.onNext();
         }
       } else {
         if (distanceTravelled * -1 > minDistanceToTravel) {
-          const cardToMoveToTopOfStack = this.stack.pop();
-          this.stack.unshift(cardToMoveToTopOfStack);
+          this.onPrevious();
         }
       }
-
-      this.stack = this.stack.map((card, index) => {
-        return {
-          ...card,
-          ...this.cardDefaults[index]
-        };
-      });
     },
     moveStack(dragXPos) {
       const activeCardOffset = dragXPos - this.dragStartX;
@@ -266,42 +275,49 @@ export default {
 </script>
 
 <template>
-  <div
-    class="vue-card-stack__stack-wrapper"
-    :style="{ height: `${cardHeight + (paddingVertical * 2)}px`, width: containerWidth }"
-  >
+  <div class="vue-card-stack__wrapper">
     <div
-      class="vue-card-stack__card-wrapper"
-      v-for="(card, index) in stack"
-      :key="card._id"
-      :style="{
-        opacity: card.opacity,
-        display: card.display,
-        top: `${card.yPos}px`,
-        width: `${card.width}px`,
-        height: `${card.height}px`,
-        zIndex: card.zIndex,
-        transition: `transform ${
-          isDragging ? 0 : speed
-        }s ease, opacity ${speed}s ease`,
-        transform: `
-          scale(${card.scale}, ${card.scale}) 
-          translate(${card.xPos}px, 0)
-        `
-      }"
+      class="vue-card-stack__stack"
+      :style="{ height: `${cardHeight + (paddingVertical * 2)}px`, width: containerWidth }"
     >
-      <slot v-bind:card="{ ...card, $index: index }" name="card"></slot>
+      <div
+        class="vue-card-stack__card"
+        v-for="(card, index) in stack"
+        :key="card._id"
+        :style="{
+          opacity: card.opacity,
+          display: card.display,
+          top: `${card.yPos}px`,
+          width: `${card.width}px`,
+          height: `${card.height}px`,
+          zIndex: card.zIndex,
+          transition: `transform ${
+            isDragging ? 0 : speed
+          }s ease, opacity ${speed}s ease`,
+          transform: `
+            scale(${card.scale}, ${card.scale}) 
+            translate(${card.xPos}px, 0)
+          `
+        }"
+      >
+        <slot v-bind:card="{ ...card, $index: index }" name="card"></slot>
+      </div>
     </div>
+    <slot name="nav" v-bind="{ activeCardIndex: originalActiveCardIndex, onNext, onPrevious }"></slot>
   </div>
 </template>
 
 <style scoped>
-.vue-card-stack__stack-wrapper {
+.vue-card-stack__wrapper {
+  position: relative;
+}
+
+.vue-card-stack__stack {
   position: relative;
   overflow: hidden;
 }
 
-.vue-card-stack__card-wrapper {
+.vue-card-stack__card {
   position: absolute;
   transform-origin: 0 50%;
   cursor: grab;
