@@ -1,5 +1,7 @@
 <template>
-  <div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+  <div
+    style="width: 100%; display: flex; align-items: center; flex-direction: column;"
+  >
     <VueCardStack
       :cards="cards"
       :card-width="300"
@@ -9,10 +11,11 @@
       :scale-multiplier="parseFloat(scaleMultiplier)"
       ref="stack"
     >
-
       <template v-slot:nav="{ activeCardIndex, onNext, onPrevious }">
         <nav class="nav">
-          <div class="counter">{{activeCardIndex + 1}}/{{cards.length}}</div>
+          <div class="counter">
+            {{ activeCardIndex + 1 }}/{{ cards.length }}
+          </div>
           <button v-on:click="onPrevious" class="button">
             <span class="chevron left"></span>
           </button>
@@ -28,7 +31,9 @@
     </VueCardStack>
     <div class="controls">
       <div class="slide__container">
-        <label>maxVisibleCards: <span>{{ maxVisibleCards }}</span></label>
+        <label
+          >maxVisibleCards: <span>{{ maxVisibleCards }}</span></label
+        >
         <input
           type="range"
           min="4"
@@ -39,7 +44,9 @@
         />
       </div>
       <div class="slide__container">
-        <label>stackWidth: <span>{{ stackWidth }}</span></label>
+        <label
+          >stackWidth: <span>{{ stackWidth }}</span></label
+        >
         <input
           type="range"
           min="330"
@@ -49,11 +56,15 @@
         />
       </div>
       <div class="slide__container">
-        <label>scaleMultiplier: <span>{{ scaleMultiplier }}</span></label>
+        <label
+          >scaleMultiplier: <span>{{ scaleMultiplier }}</span></label
+        >
         <input
           style="width: 100px; height: 40px;"
           type="number"
-          step="0.05" min="0" max="1"
+          step="0.05"
+          min="0"
+          max="1"
           v-model="scaleMultiplier"
         />
       </div>
@@ -64,12 +75,13 @@
 <script>
 import Vue from "vue";
 import VueCardStack from "@/vue-card-stack.vue";
+// import VueCardStack from "vue-card-stack";
 import { debounce } from "@/utils/debounce";
 
 export default Vue.extend({
   name: "ServeDev",
   components: {
-    VueCardStack
+    VueCardStack,
   },
   data() {
     return {
@@ -107,7 +119,7 @@ export default Vue.extend({
         { background: "#e2c58a" },
         { background: "#fc8890" },
         { background: "#b35d7f" },
-      ]
+      ],
     };
   },
   computed: {
@@ -118,9 +130,9 @@ export default Vue.extend({
       set: debounce(function(val) {
         this.containerWidth = parseInt(val);
         this.$refs.stack.rebuild();
-      }, 100)
-    }
-  }
+      }, 100),
+    },
+  },
 });
 </script>
 
@@ -135,7 +147,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 16px;
   color: #2c3e50;
 }
@@ -193,13 +206,13 @@ body {
 
 .nav .button:focus {
   outline: 0;
-  box-shadow: 0 0 0 2px rgba(0,132,255,.5);
+  box-shadow: 0 0 0 2px rgba(0, 132, 255, 0.5);
 }
 
 .chevron {
   border-style: solid;
   border-width: 0.25em 0.25em 0 0;
-  content: '';
+  content: "";
   height: 0.45em;
   width: 0.45em;
 }
@@ -232,7 +245,8 @@ body {
   font-weight: 600;
 }
 
-input[type=number], select {
+input[type="number"],
+select {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -242,17 +256,17 @@ input[type=number], select {
   box-sizing: border-box;
 }
 
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   margin: 18px 0;
   width: 100%;
 }
 
-input[type=range]:focus {
+input[type="range"]:focus {
   outline: none;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
@@ -261,7 +275,7 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 1.3px;
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   box-shadow: 1px 1px 1px #ccc;
   border: 1px solid #eee;
   height: 36px;
@@ -273,11 +287,11 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -14px;
 }
 
-input[type=range]:focus::-webkit-slider-runnable-track {
+input[type="range"]:focus::-webkit-slider-runnable-track {
   background: #3eaf7c;
 }
 
-input[type=range]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
@@ -288,7 +302,7 @@ input[type=range]::-moz-range-track {
   border: 0.2px solid #010101;
 }
 
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
@@ -298,7 +312,7 @@ input[type=range]::-moz-range-thumb {
   cursor: pointer;
 }
 
-input[type=range]::-ms-track {
+input[type="range"]::-ms-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
@@ -309,21 +323,21 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 
-input[type=range]::-ms-fill-lower {
+input[type="range"]::-ms-fill-lower {
   background: #3eaf7c;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 
-input[type=range]::-ms-fill-upper {
+input[type="range"]::-ms-fill-upper {
   background: #3eaf7c;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   border: 1px solid #000000;
   height: 36px;
@@ -333,11 +347,11 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 
-input[type=range]:focus::-ms-fill-lower {
+input[type="range"]:focus::-ms-fill-lower {
   background: #3eaf7c;
 }
 
-input[type=range]:focus::-ms-fill-upper {
+input[type="range"]:focus::-ms-fill-upper {
   background: #3eaf7c;
 }
 </style>

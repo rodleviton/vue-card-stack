@@ -30,6 +30,7 @@
 <script>
 import Vue from "vue";
 import VueCardStack from "../../../src/vue-card-stack";
+// import VueCardStack from "vue-card-stack";
 
 export default {
   name: "BasicDemo",

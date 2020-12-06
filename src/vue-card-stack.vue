@@ -6,44 +6,44 @@ export default {
   props: {
     cards: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     cardWidth: {
       type: Number,
-      default: () => 300
+      default: () => 300,
     },
     cardHeight: {
       type: Number,
-      default: () => 400
+      default: () => 400,
     },
     stackWidth: {
       type: [Number, String],
-      default: () => null
+      default: () => null,
     },
     sensitivity: {
       type: Number,
-      default: () => 0.25
+      default: () => 0.25,
     },
     maxVisibleCards: {
       type: Number,
-      default: () => 10
+      default: () => 10,
     },
     scaleMultiplier: {
       type: Number,
-      default: () => 0.5 // last visible card will be 50% scale
+      default: () => 0.5, // last visible card will be 50% scale
     },
     speed: {
       type: Number,
-      default: () => 0.2
+      default: () => 0.2,
     },
     paddingHorizontal: {
       type: Number,
-      default: () => 20
+      default: () => 20,
     },
     paddingVertical: {
       type: Number,
-      default: () => 20
-    }
+      default: () => 20,
+    },
   },
   data() {
     return {
@@ -53,24 +53,24 @@ export default {
       isDragging: false,
       dragStartX: 0,
       dragStartY: 0,
-      isDraggingRight: false
+      isDraggingRight: false,
     };
   },
   mounted() {
     this.init();
-    window.addEventListener("resize", this.handleResize)
+    window.addEventListener("resize", this.handleResize);
     this.$el.addEventListener(this.touchStartEvent, this.onTouchStart);
     document.addEventListener(this.touchEndEvent, this.onTouchEnd);
   },
   computed: {
     _stackWidth() {
       if (!this.stackWidth) {
-        return this.cardWidth + (this.paddingHorizontal * 2);
-      } else if (typeof this.stackWidth === 'number') {
-        return this.stackWidth
+        return this.cardWidth + this.paddingHorizontal * 2;
+      } else if (typeof this.stackWidth === "number") {
+        return this.stackWidth;
       }
 
-      return this.width || this.$el.clientWidth
+      return this.width || this.$el.clientWidth;
     },
     _maxVisibleCards() {
       return this.cards.length > this.maxVisibleCards
@@ -82,12 +82,12 @@ export default {
     },
     containerWidth() {
       if (!this.stackWidth) {
-        return `${this.cardWidth + (this.paddingHorizontal * 2)}px`;
-      } else if (typeof this.stackWidth === 'number') {
-        return `${this.stackWidth}px`
+        return `${this.cardWidth + this.paddingHorizontal * 2}px`;
+      } else if (typeof this.stackWidth === "number") {
+        return `${this.stackWidth}px`;
       }
-      
-      return this.stackWidth
+
+      return this.stackWidth;
     },
     elementXPosOffset() {
       return this.$el.getBoundingClientRect().x;
@@ -132,7 +132,7 @@ export default {
           scale: scale > 0 ? scale : 0,
           width: this.cardWidth,
           height: this.cardHeight,
-          zIndex: this.cards.length - index
+          zIndex: this.cards.length - index,
         };
       });
     },
@@ -144,11 +144,11 @@ export default {
     },
     originalActiveCardIndex() {
       if (this.stack[this.activeCardIndex]) {
-        return this.stack[this.activeCardIndex]._index
+        return this.stack[this.activeCardIndex]._index;
       }
 
-      return 0
-    }
+      return 0;
+    },
   },
   methods: {
     init() {
@@ -160,7 +160,7 @@ export default {
           _id: new Date().getTime() + index,
           _index: index,
           ...card,
-          ...this.cardDefaults[index]
+          ...this.cardDefaults[index],
         };
       });
     },
@@ -169,14 +169,14 @@ export default {
         this.stack = this.stack.map((card, index) => {
           return {
             ...card,
-            ...this.cardDefaults[index]
+            ...this.cardDefaults[index],
           };
         });
       });
     },
     handleResize: debounce(function() {
-      this.width = this.$el.clientWidth
-      this.rebuild()
+      this.width = this.$el.clientWidth;
+      this.rebuild();
     }, 250),
     onNext() {
       const cardToMoveToBottomOfStack = this.stack.shift();
@@ -195,8 +195,7 @@ export default {
       const minDistanceToTravel =
         (this.cardWidth + this.paddingHorizontal) / (1 / this.sensitivity);
 
-
-      this.$emit('move', 0)
+      this.$emit("move", 0);
 
       if (this.isDraggingRight) {
         if (distanceTravelled > minDistanceToTravel) {
@@ -211,7 +210,10 @@ export default {
     moveStack(dragXPos) {
       const activeCardOffset = dragXPos - this.dragStartX;
 
-      this.$emit('move', activeCardOffset / (this.cardWidth + this.paddingHorizontal))
+      this.$emit(
+        "move",
+        activeCardOffset / (this.cardWidth + this.paddingHorizontal)
+      );
 
       if (this.isDraggingRight) {
         this.activeCardIndex = 1;
@@ -239,7 +241,10 @@ export default {
           ...this.cardDefaults[index],
           xPos,
           scale,
-          opacity: index === 0 && !this.isDraggingRight ? 1 : this.cardDefaults[index].opacity 
+          opacity:
+            index === 0 && !this.isDraggingRight
+              ? 1
+              : this.cardDefaults[index].opacity,
         };
       });
     },
@@ -269,8 +274,8 @@ export default {
 
       this.isDraggingRight = dragXPos > this.dragStartX;
       this.moveStack(dragXPos);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -278,7 +283,10 @@ export default {
   <div class="vue-card-stack__wrapper">
     <div
       class="vue-card-stack__stack"
-      :style="{ height: `${cardHeight + (paddingVertical * 2)}px`, width: containerWidth }"
+      :style="{
+        height: `${cardHeight + paddingVertical * 2}px`,
+        width: containerWidth,
+      }"
     >
       <div
         class="vue-card-stack__card"
@@ -297,13 +305,16 @@ export default {
           transform: `
             scale(${card.scale}, ${card.scale}) 
             translate(${card.xPos}px, 0)
-          `
+          `,
         }"
       >
         <slot v-bind:card="{ ...card, $index: index }" name="card"></slot>
       </div>
     </div>
-    <slot name="nav" v-bind="{ activeCardIndex: originalActiveCardIndex, onNext, onPrevious }"></slot>
+    <slot
+      name="nav"
+      v-bind="{ activeCardIndex: originalActiveCardIndex, onNext, onPrevious }"
+    ></slot>
   </div>
 </template>
 
