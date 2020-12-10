@@ -31,9 +31,10 @@
     </VueCardStack>
     <div class="controls">
       <div class="slide__container">
-        <label
-          >maxVisibleCards: <span>{{ maxVisibleCards }}</span></label
-        >
+        <label>
+          maxVisibleCards:
+          <span>{{ maxVisibleCards }}</span>
+        </label>
         <input
           type="range"
           min="4"
@@ -44,9 +45,10 @@
         />
       </div>
       <div class="slide__container">
-        <label
-          >stackWidth: <span>{{ stackWidth }}</span></label
-        >
+        <label>
+          stackWidth:
+          <span>{{ stackWidth }}</span>
+        </label>
         <input
           type="range"
           min="330"
@@ -56,9 +58,10 @@
         />
       </div>
       <div class="slide__container">
-        <label
-          >scaleMultiplier: <span>{{ scaleMultiplier }}</span></label
-        >
+        <label>
+          scaleMultiplier:
+          <span>{{ scaleMultiplier }}</span>
+        </label>
         <input
           style="width: 100px; height: 40px;"
           type="number"
