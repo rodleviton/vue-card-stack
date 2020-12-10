@@ -62,6 +62,18 @@ export default {
     this.$el.addEventListener(this.touchStartEvent, this.onTouchStart);
     document.addEventListener(this.touchEndEvent, this.onTouchEnd);
   },
+  watch: {
+    _scaleMultiplier: {
+      handler() {
+        this.rebuild();
+      },
+    },
+    _maxVisibleCards: {
+      handler() {
+        this.rebuild();
+      },
+    },
+  },
   computed: {
     _stackWidth() {
       if (!this.stackWidth) {
