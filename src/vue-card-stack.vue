@@ -57,8 +57,7 @@ export default {
       isDragging: false,
       dragStartX: 0,
       dragStartY: 0,
-      isDraggingRight: false,
-      dragEnabled: true
+      isDraggingRight: false
     };
   },
   mounted() {
