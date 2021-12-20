@@ -93,7 +93,7 @@ See the full api docs and examples here: https://rodleviton.github.io/vue-card-s
 
 ## Examples
 
-https://reactivepixels.com/rodleviton/pixels/EXi4DocHUfMi3FHpnLT7
+https://www.rodleviton.com/pixels/vue-card-stack
 
 ## License
 
