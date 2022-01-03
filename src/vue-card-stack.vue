@@ -44,6 +44,10 @@ export default {
       type: Number,
       default: () => 20,
     },
+    dragEnabled: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   data() {
     return {
@@ -53,7 +57,7 @@ export default {
       isDragging: false,
       dragStartX: 0,
       dragStartY: 0,
-      isDraggingRight: false,
+      isDraggingRight: false
     };
   },
   mounted() {
@@ -285,7 +289,9 @@ export default {
       const dragXPos = this.getDragXPos(e) - this.elementXPosOffset;
 
       this.isDraggingRight = dragXPos > this.dragStartX;
-      this.moveStack(dragXPos);
+      if (this.dragEnabled){
+        this.moveStack(dragXPos);
+      }
     },
   },
 };
