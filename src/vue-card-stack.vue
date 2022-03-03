@@ -145,6 +145,7 @@ export default {
           width: this.cardWidth,
           height: this.cardHeight,
           zIndex: this.cards.length - index,
+          isDragging: this.isDragging
         };
       });
     },
@@ -212,10 +213,14 @@ export default {
       if (this.isDraggingRight) {
         if (distanceTravelled > minDistanceToTravel) {
           this.onNext();
+        } else {
+          this.rebuild();
         }
       } else {
         if (distanceTravelled * -1 > minDistanceToTravel) {
           this.onPrevious();
+        } else {
+          this.rebuild();
         }
       }
     },
