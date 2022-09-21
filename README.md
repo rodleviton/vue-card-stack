@@ -1,3 +1,7 @@
+# Project Status: 🚨 Unmaintained 🚨
+
+This project is no longer actively maintained. I will not be accepting pull requests, addressing issues, nor making future releases. I have plans to revisit this project in the future but it will likely become a multi-framework project under a different repo name. 🕊️
+
 <p align="center">
   <a href="https://github.com/rodleviton/vue-card-stack/" target="_blank">
     <img width="300" alt="Vue Card Stack Logo" src="https://github.com/rodleviton/vue-card-stack/blob/master/vue-card-stack.png">
