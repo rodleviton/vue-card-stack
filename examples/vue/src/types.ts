@@ -1,38 +1,11 @@
+import type { BaseCardData } from "@card-stack/vue";
+
 /**
  * Example card data type
  */
-export interface CardData {
+export type CardData = BaseCardData & {
   /** Background color for the card */
   background: string;
+  /** Optional title for the card */
   title?: string;
-  _id?: string;
-  _index?: number;
-  opacity?: number;
-  display?: string;
-  xPos?: number;
-  yPos?: number;
-  scale?: number;
-  width?: number;
-  height?: number;
-  zIndex?: number;
-  isDragging?: boolean;
-}
-
-export interface CardStackItem extends CardData {
-  $index: number;
-  _id: string;
-  _index: number;
-  style: CardStyle;
-}
-
-export interface CardStyle {
-  opacity: number;
-  display: string;
-  xPos: number;
-  yPos: number;
-  scale: number;
-  width: number;
-  height: number;
-  zIndex: number;
-  isDragging: boolean;
-}
+};
