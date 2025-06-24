@@ -1,4 +1,4 @@
-import { defineComponent as Q, ref as u, computed as l, onMounted as Z, onBeforeUnmount as ee, createElementBlock as E, openBlock as T, createElementVNode as te, renderSlot as Y, normalizeStyle as A, Fragment as ae, renderList as ne, nextTick as oe } from "vue";
+import { defineComponent as Q, ref as c, computed as l, onMounted as Z, onBeforeUnmount as ee, createElementBlock as E, openBlock as T, createElementVNode as te, renderSlot as Y, normalizeStyle as A, Fragment as ae, renderList as ne, nextTick as oe } from "vue";
 const se = /* @__PURE__ */ Q({
   __name: "VueCardStack",
   props: {
@@ -14,23 +14,23 @@ const se = /* @__PURE__ */ Q({
     paddingVertical: { default: 20 }
   },
   emits: ["move"],
-  setup(d, { emit: P }) {
+  setup(d, { emit: w }) {
     const f = (t, a) => {
       let n;
-      return function(...W) {
+      return function(...y) {
         const x = () => {
-          clearTimeout(n), t(...W);
+          clearTimeout(n), t(...y);
         };
         clearTimeout(n), n = setTimeout(x, a);
       };
-    }, e = d, h = P, s = u([]), V = u(0), c = u(1), m = u(!1), g = u(0), H = u(0), k = u(!1), r = u(null), y = l(() => {
+    }, e = d, h = w, s = c([]), H = c(0), i = c(1), m = c(!1), g = c(0), S = c(0), k = c(!1), r = c(null), _ = l(() => {
       var t;
       if (e.stackWidth) {
         if (typeof e.stackWidth == "number")
           return e.stackWidth;
       } else return e.cardWidth + e.paddingHorizontal * 2;
-      return V.value || ((t = r.value) == null ? void 0 : t.clientWidth) || 0;
-    }), _ = l(() => e.cards.length > e.maxVisibleCards ? e.maxVisibleCards : e.cards.length - 1), S = l(() => (e.scaleMultiplier - 1) * -1 / 10), N = l(() => {
+      return H.value || ((t = r.value) == null ? void 0 : t.clientWidth) || 0;
+    }), W = l(() => e.cards.length > e.maxVisibleCards ? e.maxVisibleCards : e.cards.length - 1), V = l(() => (e.scaleMultiplier - 1) * -1 / 10), N = l(() => {
       if (e.stackWidth) {
         if (typeof e.stackWidth == "number")
           return `${e.stackWidth}px`;
@@ -39,15 +39,15 @@ const se = /* @__PURE__ */ Q({
     }), $ = l(() => {
       var t;
       return ((t = r.value) == null ? void 0 : t.getBoundingClientRect().x) || 0;
-    }), v = l(() => "ontouchstart" in window), w = l(() => v.value ? "touchmove" : "mousemove"), L = l(() => v.value ? "touchstart" : "mousedown"), b = l(() => v.value ? "touchend" : "mouseup"), D = l(() => e.cards.map((t, a) => {
-      const n = z.value * (a - 1);
-      return a ? a === 1 ? y.value - e.cardWidth - e.paddingHorizontal : y.value - e.cardWidth - n - e.paddingHorizontal : y.value + e.paddingHorizontal;
-    })), i = l(() => e.cards.map((t, a) => {
-      const n = a >= 1 ? 1 - S.value * (a - 1) : 1, o = D.value[a];
+    }), v = l(() => "ontouchstart" in window), z = l(() => v.value ? "touchmove" : "mousemove"), L = l(() => v.value ? "touchstart" : "mousedown"), b = l(() => v.value ? "touchend" : "mouseup"), D = l(() => e.cards.map((t, a) => {
+      const n = C.value * (a - 1);
+      return a ? a === 1 ? _.value - e.cardWidth - e.paddingHorizontal : _.value - e.cardWidth - n - e.paddingHorizontal : _.value + e.paddingHorizontal;
+    })), u = l(() => e.cards.map((t, a) => {
+      const n = a >= 1 ? 1 - V.value * (a - 1) : 1, o = D.value[a];
       return {
-        opacity: a > 0 && a < _.value ? 1 : 0,
-        display: a < _.value + 1 ? "block" : "none",
-        xPos: a < _.value ? o : o + z.value,
+        opacity: a > 0 && a < W.value ? 1 : 0,
+        display: a < W.value + 1 ? "block" : "none",
+        xPos: a < W.value ? o : o + C.value,
         yPos: e.paddingVertical,
         scale: n > 0 ? n : 0,
         width: e.cardWidth,
@@ -55,23 +55,23 @@ const se = /* @__PURE__ */ Q({
         zIndex: e.cards.length - a,
         isDragging: m.value
       };
-    })), z = l(() => (y.value - e.paddingHorizontal * 2 - e.cardWidth) / (_.value - 2)), U = l(() => s.value[c.value] ? s.value[c.value]._index : 0), j = () => {
+    })), C = l(() => (_.value - e.paddingHorizontal * 2 - e.cardWidth) / (W.value - 2)), U = l(() => s.value[i.value] ? s.value[i.value]._index : 0), j = () => {
       const t = [...e.cards];
       t.unshift(t.pop()), s.value = t.map((a, n) => ({
         _id: (/* @__PURE__ */ new Date()).getTime() + n,
         _index: n,
         ...a,
-        ...i.value[n]
-      })), console.log("Card yPos values:", s.value.map((a) => ({ id: a._id, yPos: a.yPos }))), console.log("PaddingVertical:", e.paddingVertical);
+        ...u.value[n]
+      }));
     }, p = () => {
       oe(() => {
         s.value = s.value.map((t, a) => ({
           ...t,
-          ...i.value[a]
+          ...u.value[a]
         }));
       });
     }, I = f(() => {
-      r.value && (V.value = r.value.clientWidth, p());
+      r.value && (H.value = r.value.clientWidth, p());
     }, 250), R = () => {
       const t = s.value.shift();
       s.value.push(t), p();
@@ -79,35 +79,35 @@ const se = /* @__PURE__ */ Q({
       const t = s.value.pop();
       s.value.unshift(t), p();
     }, q = () => {
-      const t = s.value[c.value], a = D.value[c.value], n = t.xPos - a, o = (e.cardWidth + e.paddingHorizontal) / (1 / e.sensitivity);
+      const t = s.value[i.value], a = D.value[i.value], n = t.xPos - a, o = (e.cardWidth + e.paddingHorizontal) / (1 / e.sensitivity);
       h("move", 0), k.value ? n > o ? R() : p() : n * -1 > o ? M() : p();
     }, G = (t) => {
       const a = t - g.value;
       h(
         "move",
         a / (e.cardWidth + e.paddingHorizontal)
-      ), k.value ? c.value = 1 : c.value = 0, s.value = s.value.map((n, o) => {
-        const W = o === c.value, x = W ? i.value[o].xPos + a : i.value[o].xPos + z.value / (e.cardWidth + e.paddingHorizontal) * a, K = W ? i.value[o].scale : i.value[o].scale + S.value / (e.cardWidth + e.paddingHorizontal) * a;
+      ), k.value ? i.value = 1 : i.value = 0, s.value = s.value.map((n, o) => {
+        const y = o === i.value, x = y ? u.value[o].xPos + a : u.value[o].xPos + C.value / (e.cardWidth + e.paddingHorizontal) * a, K = y ? u.value[o].scale : u.value[o].scale + V.value / (e.cardWidth + e.paddingHorizontal) * a;
         return {
           ...n,
-          ...i.value[o],
+          ...u.value[o],
           xPos: x,
           scale: K,
-          opacity: o === 0 && !k.value ? 1 : i.value[o].opacity
+          opacity: o === 0 && !k.value ? 1 : u.value[o].opacity
         };
       });
     }, O = (t) => v.value ? t.touches[0].clientX : t.clientX, J = (t) => v.value ? t.touches[0].clientY : t.clientY, X = (t) => {
-      m.value = !0, g.value = O(t) - $.value, H.value = J(t), document.addEventListener(w.value, C);
+      m.value = !0, g.value = O(t) - $.value, S.value = J(t), document.addEventListener(z.value, P);
     }, B = () => {
-      m.value = !1, g.value = 0, H.value = 0, document.removeEventListener(w.value, C), q();
-    }, C = (t) => {
+      m.value = !1, g.value = 0, S.value = 0, document.removeEventListener(z.value, P), q();
+    }, P = (t) => {
       const a = O(t) - $.value;
       k.value = a > g.value, G(a);
     };
     return Z(() => {
       j(), window.addEventListener("resize", I), r.value && r.value.addEventListener(L.value, X), document.addEventListener(b.value, B);
     }), ee(() => {
-      window.removeEventListener("resize", I), r.value && r.value.removeEventListener(L.value, X), document.removeEventListener(b.value, B), document.removeEventListener(w.value, C);
+      window.removeEventListener("resize", I), r.value && r.value.removeEventListener(L.value, X), document.removeEventListener(b.value, B), document.removeEventListener(z.value, P);
     }), (t, a) => (T(), E("div", {
       class: "vue-card-stack__wrapper",
       ref_key: "elementRef",
@@ -148,12 +148,12 @@ const se = /* @__PURE__ */ Q({
       }, void 0, !0)
     ], 512));
   }
-}), le = (d, P) => {
+}), le = (d, w) => {
   const f = d.__vccOpts || d;
-  for (const [e, h] of P)
+  for (const [e, h] of w)
     f[e] = h;
   return f;
-}, F = /* @__PURE__ */ le(se, [["__scopeId", "data-v-63270985"]]), ie = {
+}, F = /* @__PURE__ */ le(se, [["__scopeId", "data-v-0672ce56"]]), ue = {
   install: (d) => {
     d.component("VueCardStack", F);
   }
@@ -161,5 +161,5 @@ const se = /* @__PURE__ */ Q({
 typeof window < "u" && window.Vue && window.Vue.component("VueCardStack", F);
 export {
   F as VueCardStack,
-  ie as default
+  ue as default
 };

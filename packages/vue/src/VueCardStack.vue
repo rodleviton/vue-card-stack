@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 
+// Debounce utility function
+const debounce = (func: Function, wait: number) => {
+  let timeout: ReturnType<typeof setTimeout>
+  return function executedFunction(...args: any[]) {
+    const later = () => {
+      clearTimeout(timeout)
+      func(...args)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
+}
+
 const props = withDefaults(defineProps<{
   cards: any[];
   cardWidth?: number;
@@ -142,9 +155,7 @@ const init = () => {
     }
   })
   
-  // Debug: Check yPos values
-  console.log('Card yPos values:', stack.value.map(card => ({ id: card._id, yPos: card.yPos })))
-  console.log('PaddingVertical:', props.paddingVertical)
+
 }
 
 const rebuild = () => {
@@ -158,12 +169,12 @@ const rebuild = () => {
   })
 }
 
-const handleResize = () => {
+const handleResize = debounce(() => {
   if (elementRef.value) {
     width.value = elementRef.value.clientWidth
     rebuild()
   }
-}
+}, 250)
 
 const onNext = () => {
   const cardToMoveToBottomOfStack = stack.value.shift()

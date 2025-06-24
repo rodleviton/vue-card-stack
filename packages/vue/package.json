@@ -23,9 +23,7 @@
   "peerDependencies": {
     "vue": "^3.0.0"
   },
-  "dependencies": {
-    "@card-stack/core": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@vitejs/plugin-vue": "^5.0.0",

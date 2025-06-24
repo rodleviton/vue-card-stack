@@ -19,11 +19,10 @@ export default defineConfig({
     },
     cssCodeSplit: false,
     rollupOptions: {
-      external: ["vue", "@card-stack/core"],
+      external: ["vue"],
       output: {
         globals: {
           vue: "Vue",
-          "@card-stack/core": "CardStackCore",
         },
         assetFileNames: "style.css",
       },
