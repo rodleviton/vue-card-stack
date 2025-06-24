@@ -1,4 +1,8 @@
+/**
+ * Example card data type
+ */
 export interface CardData {
+  /** Background color for the card */
   background: string;
   title?: string;
   _id?: string;

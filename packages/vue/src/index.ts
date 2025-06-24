@@ -1,10 +1,10 @@
-import VueCardStack from "./VueCardStack.vue";
+import VueCardStack from "./components/VueCardStack.vue";
+export * from "./types";
 
-// Export the component
+// Export the component and plugin
 export { VueCardStack };
 
-// Default export
-export default {
+export const VueCardStackPlugin = {
   install: (app: any) => {
     app.component("VueCardStack", VueCardStack);
   },

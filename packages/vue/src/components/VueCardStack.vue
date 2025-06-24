@@ -1,0 +1,111 @@
+<script setup lang="ts">
+import { ref, toRef } from 'vue'
+import { useCardStack } from '../composables/useCardStack'
+import type { CardStackProps, CardStackEmits, CardStackConfig } from '../types'
+
+// Props with defaults
+const props = withDefaults(defineProps<CardStackProps>(), {
+  cardWidth: 300,
+  cardHeight: 400,
+  stackWidth: null,
+  sensitivity: 0.25,
+  maxVisibleCards: 10,
+  scaleMultiplier: 0.5,
+  speed: 0.2,
+  paddingHorizontal: 20,
+  paddingVertical: 20
+})
+
+// Emits
+const emit = defineEmits<CardStackEmits>()
+
+// Template ref
+const elementRef = ref<HTMLElement | null>(null)
+
+// Convert props to config ref for composable
+const config = toRef(() => ({
+  cardWidth: props.cardWidth,
+  cardHeight: props.cardHeight,
+  stackWidth: props.stackWidth,
+  sensitivity: props.sensitivity,
+  maxVisibleCards: props.maxVisibleCards,
+  scaleMultiplier: props.scaleMultiplier,
+  speed: props.speed,
+  paddingHorizontal: props.paddingHorizontal,
+  paddingVertical: props.paddingVertical
+} satisfies CardStackConfig))
+
+// Use card stack composable
+const {
+  stack,
+  containerWidth,
+  originalActiveCardIndex,
+  isDragging,
+  onNext,
+  onPrevious
+} = useCardStack(
+  toRef(() => props.cards),
+  config,
+  elementRef,
+  emit
+)
+</script>
+
+<template>
+  <div class="vue-card-stack__wrapper" ref="elementRef">
+    <div
+      class="vue-card-stack__stack"
+      :style="{
+        height: `${props.cardHeight + props.paddingVertical * 2}px`,
+        width: containerWidth,
+      }"
+    >
+      <div
+        class="vue-card-stack__card"
+        v-for="(card, index) in stack"
+        :key="card._id"
+        :style="{
+          opacity: card.opacity,
+          display: card.display,
+          width: `${card.width}px`,
+          height: `${card.height}px`,
+          zIndex: card.zIndex,
+          transition: `transform ${
+            isDragging ? 0 : props.speed
+          }s ease, opacity ${props.speed}s ease`,
+          transform: `
+            scale(${card.scale}, ${card.scale}) 
+            translate(${card.xPos}px, ${card.yPos}px)
+          `,
+        }"
+      >
+        <slot name="card" v-bind:card="{ ...card, $index: index }" />
+      </div>
+    </div>
+    <slot
+      name="nav"
+      :active-card-index="originalActiveCardIndex"
+      :on-next="onNext"
+      :on-previous="onPrevious"
+    />
+  </div>
+</template>
+
+<style scoped>
+.vue-card-stack__wrapper {
+  position: relative;
+}
+
+.vue-card-stack__stack {
+  position: relative;
+  overflow: hidden;
+}
+
+.vue-card-stack__card {
+  position: absolute;
+  transform-origin: 0 50%;
+  cursor: grab;
+  left: 0;
+  top: 0;
+}
+</style> 

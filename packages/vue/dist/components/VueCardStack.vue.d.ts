@@ -1,25 +1,16 @@
+import { CardStackProps } from '../types';
+
 declare function __VLS_template(): {
     card?(_: {
         card: any;
     }): any;
     nav?(_: {
-        activeCardIndex: any;
+        activeCardIndex: number;
         onNext: () => void;
         onPrevious: () => void;
     }): any;
 };
-declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    cards: any[];
-    cardWidth?: number;
-    cardHeight?: number;
-    stackWidth?: number | string | null;
-    sensitivity?: number;
-    maxVisibleCards?: number;
-    scaleMultiplier?: number;
-    speed?: number;
-    paddingHorizontal?: number;
-    paddingVertical?: number;
-}>, {
+declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<any>>, {
     cardWidth: number;
     cardHeight: number;
     stackWidth: null;
@@ -31,18 +22,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     paddingVertical: number;
 }>>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     move: (value: number) => void;
-}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<{
-    cards: any[];
-    cardWidth?: number;
-    cardHeight?: number;
-    stackWidth?: number | string | null;
-    sensitivity?: number;
-    maxVisibleCards?: number;
-    scaleMultiplier?: number;
-    speed?: number;
-    paddingHorizontal?: number;
-    paddingVertical?: number;
-}>, {
+}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<any>>, {
     cardWidth: number;
     cardHeight: number;
     stackWidth: null;

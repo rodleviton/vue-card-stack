@@ -1,10 +1,10 @@
-import { default as VueCardStack } from './VueCardStack.vue';
+import { default as VueCardStack } from './components/VueCardStack.vue';
 
+export * from './types';
 export { VueCardStack };
-declare const _default: {
+export declare const VueCardStackPlugin: {
     install: (app: any) => void;
 };
-export default _default;
 declare global {
     interface Window {
         Vue?: any;
