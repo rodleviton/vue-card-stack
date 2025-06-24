@@ -272,7 +272,7 @@ const G = /* @__PURE__ */ B({
   for (const [o, n] of e)
     t[o] = n;
   return t;
-}, $ = /* @__PURE__ */ J(G, [["__scopeId", "data-v-437947cf"]]), Q = {
+}, $ = /* @__PURE__ */ J(G, [["__scopeId", "data-v-10275018"]]), Q = {
   install: (u) => {
     u.component("VueCardStack", $);
   }

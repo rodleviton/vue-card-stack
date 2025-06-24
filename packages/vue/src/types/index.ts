@@ -1,4 +1,12 @@
 /**
+ * Base card data interface that all card types must extend
+ */
+export interface BaseCardData {
+  _id?: number;
+  _index?: number;
+}
+
+/**
  * Configuration options for the card stack component
  */
 export interface CardStackConfig {
@@ -25,7 +33,7 @@ export interface CardStackConfig {
 /**
  * Internal card data with positioning and display properties
  */
-export interface InternalCard<T = any> {
+export interface InternalCard {
   /** Unique identifier for the card */
   _id: number;
   /** Original index in the cards array */
@@ -58,7 +66,7 @@ export type DragEvent = MouseEvent | TouchEvent;
 /**
  * Card stack component props
  */
-export interface CardStackProps<T = any> {
+export interface CardStackProps<T extends BaseCardData = BaseCardData> {
   /** Array of card data */
   cards: T[];
   /** Width of individual cards in pixels */
@@ -104,7 +112,9 @@ export interface NavSlotProps {
 /**
  * Card slot props
  */
-export interface CardSlotProps<T = any> {
+export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
   /** Card data with internal properties */
-  card: T & InternalCard<T>;
+  card: T & InternalCard;
+  /** Current index in the stack */
+  $index: number;
 }

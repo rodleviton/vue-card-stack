@@ -1,10 +1,10 @@
 import { computed, type Ref } from "vue";
-import type { CardStackConfig } from "../types";
+import type { CardStackConfig, BaseCardData } from "../types";
 
 /**
  * Composable for card stack calculations and positioning
  */
-export function useStackCalculations<T = any>(
+export function useStackCalculations<T extends BaseCardData>(
   cards: Ref<T[]>,
   config: Ref<CardStackConfig>,
   elementRef: Ref<HTMLElement | null>,

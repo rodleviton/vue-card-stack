@@ -7,7 +7,12 @@ import {
   shallowRef,
   type Ref,
 } from "vue";
-import type { CardStackConfig, InternalCard, DragEvent } from "../types";
+import type {
+  CardStackConfig,
+  InternalCard,
+  DragEvent,
+  BaseCardData,
+} from "../types";
 import { useStackCalculations } from "./useStackCalculations";
 import { useDragHandling } from "./useDragHandling";
 import { debounce } from "../utils/debounce";
@@ -15,14 +20,14 @@ import { debounce } from "../utils/debounce";
 /**
  * Main composable for card stack functionality
  */
-export function useCardStack<T = any>(
+export function useCardStack<T extends BaseCardData>(
   cards: Ref<T[]>,
   config: Ref<CardStackConfig>,
   elementRef: Ref<HTMLElement | null>,
   emit: (event: "move", value: number) => void
 ) {
   // Reactive state - using shallowRef for performance
-  const stack = shallowRef<(T & InternalCard<T>)[]>([]);
+  const stack = shallowRef<(T & InternalCard)[]>([]);
   const width = ref(0);
   const activeCardIndex = ref(1);
 
@@ -56,7 +61,7 @@ export function useCardStack<T = any>(
         _index: index,
         ...card,
         ...defaults,
-      } as T & InternalCard<T>;
+      } as T & InternalCard;
     });
   };
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, toRef } from 'vue'
 import { useCardStack } from '../composables/useCardStack'
-import type { CardStackProps, CardStackEmits, CardStackConfig } from '../types'
+import type { CardStackProps, CardStackEmits, CardStackConfig, BaseCardData } from '../types'
 
 // Props with defaults
-const props = withDefaults(defineProps<CardStackProps>(), {
+const props = withDefaults(defineProps<CardStackProps<BaseCardData>>(), {
   cardWidth: 300,
   cardHeight: 400,
   stackWidth: null,

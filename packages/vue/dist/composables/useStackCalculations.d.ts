@@ -1,10 +1,10 @@
 import { Ref } from 'vue';
-import { CardStackConfig } from '../types';
+import { CardStackConfig, BaseCardData } from '../types';
 
 /**
  * Composable for card stack calculations and positioning
  */
-export declare function useStackCalculations<T = any>(cards: Ref<T[]>, config: Ref<CardStackConfig>, elementRef: Ref<HTMLElement | null>, width: Ref<number>, isDragging: Ref<boolean>): {
+export declare function useStackCalculations<T extends BaseCardData>(cards: Ref<T[]>, config: Ref<CardStackConfig>, elementRef: Ref<HTMLElement | null>, width: Ref<number>, isDragging: Ref<boolean>): {
     stackWidth: import('vue').ComputedRef<number>;
     maxVisibleCards: import('vue').ComputedRef<number>;
     scaleMultiplier: import('vue').ComputedRef<number>;

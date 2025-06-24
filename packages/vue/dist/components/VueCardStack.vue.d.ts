@@ -1,8 +1,21 @@
-import { CardStackProps } from '../types';
+import { CardStackProps, BaseCardData } from '../types';
 
 declare function __VLS_template(): {
     card?(_: {
-        card: any;
+        card: {
+            $index: number;
+            _id: number;
+            _index: number;
+            xPos: number;
+            yPos: number;
+            scale: number;
+            opacity: number;
+            display: string;
+            zIndex: number;
+            width: number;
+            height: number;
+            isDragging: boolean;
+        };
     }): any;
     nav?(_: {
         activeCardIndex: number;
@@ -10,7 +23,7 @@ declare function __VLS_template(): {
         onPrevious: () => void;
     }): any;
 };
-declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<any>>, {
+declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<BaseCardData>>, {
     cardWidth: number;
     cardHeight: number;
     stackWidth: null;
@@ -22,7 +35,7 @@ declare const __VLS_component: import('vue').DefineComponent<import('vue').Extra
     paddingVertical: number;
 }>>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
     move: (value: number) => void;
-}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<any>>, {
+}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<BaseCardData>>, {
     cardWidth: number;
     cardHeight: number;
     stackWidth: null;
