@@ -127,6 +127,12 @@ importers:
         specifier: ^8.35.0
         version: 8.35.0(eslint@9.27.0)(typescript@5.8.3)
     devDependencies:
+      '@card-stack/prettier-config':
+        specifier: workspace:*
+        version: link:../prettier
+      '@card-stack/tsconfig':
+        specifier: workspace:*
+        version: link:../typescript
       '@eslint/js':
         specifier: ^9.29.0
         version: 9.29.0
@@ -154,10 +160,18 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
         version: 0.6.13(@trivago/prettier-plugin-sort-imports@5.2.2(@vue/compiler-sfc@3.5.17)(prettier@3.6.0))(prettier@3.6.0)
+      prettier-plugin-vue:
+        specifier: ^1.1.6
+        version: 1.1.6
     devDependencies:
+      '@card-stack/tsconfig':
+        specifier: workspace:*
+        version: link:../typescript
       typescript:
         specifier: ^5.5.0
         version: 5.8.3
+
+  tooling/typescript: {}
 
 packages:
 
@@ -2093,6 +2107,14 @@ packages:
         optional: true
       prettier-plugin-svelte:
         optional: true
+
+  prettier-plugin-vue@1.1.6:
+    resolution: {integrity: sha512-trQ/oY+6hSsGe2zPIFThXMIM0TbxMEbk2VOrKjwHWuSz7OEo0rnumbz9a47OxVPCaAnGY9vZG8qDTiTmk9bq0A==}
+
+  prettier@2.8.8:
+    resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
 
   prettier@3.6.0:
     resolution: {integrity: sha512-ujSB9uXHJKzM/2GBuE0hBOUgC77CN3Bnpqa+g80bkv3T3A93wL/xlzDATHhnhkzifz/UE2SNOvmbTz5hSkDlHw==}
@@ -4747,6 +4769,12 @@ snapshots:
       prettier: 3.6.0
     optionalDependencies:
       '@trivago/prettier-plugin-sort-imports': 5.2.2(@vue/compiler-sfc@3.5.17)(prettier@3.6.0)
+
+  prettier-plugin-vue@1.1.6:
+    dependencies:
+      prettier: 2.8.8
+
+  prettier@2.8.8: {}
 
   prettier@3.6.0: {}
 

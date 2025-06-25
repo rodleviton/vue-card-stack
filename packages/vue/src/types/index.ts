@@ -2,8 +2,8 @@
  * Base card data interface that all card types must extend
  */
 export interface BaseCardData {
-  _id?: number;
-  _index?: number;
+  _id?: number
+  _index?: number
 }
 
 /**
@@ -11,23 +11,23 @@ export interface BaseCardData {
  */
 export interface CardStackConfig {
   /** Width of individual cards in pixels */
-  cardWidth: number;
+  cardWidth: number
   /** Height of individual cards in pixels */
-  cardHeight: number;
+  cardHeight: number
   /** Width of the stack container. Can be number (px), string (CSS value), or null for auto */
-  stackWidth: number | string | null;
+  stackWidth: number | string | null
   /** Sensitivity for drag gestures (0-1, higher = more sensitive) */
-  sensitivity: number;
+  sensitivity: number
   /** Maximum number of visible cards in the stack */
-  maxVisibleCards: number;
+  maxVisibleCards: number
   /** Scale multiplier for card sizing effect */
-  scaleMultiplier: number;
+  scaleMultiplier: number
   /** Animation speed in seconds */
-  speed: number;
+  speed: number
   /** Horizontal padding around the stack */
-  paddingHorizontal: number;
+  paddingHorizontal: number
   /** Vertical padding around the stack */
-  paddingVertical: number;
+  paddingVertical: number
 }
 
 /**
@@ -35,58 +35,58 @@ export interface CardStackConfig {
  */
 export interface InternalCard {
   /** Unique identifier for the card */
-  _id: number;
+  _id: number
   /** Original index in the cards array */
-  _index: number;
+  _index: number
   /** X position in pixels */
-  xPos: number;
+  xPos: number
   /** Y position in pixels */
-  yPos: number;
+  yPos: number
   /** Scale factor (0-1) */
-  scale: number;
+  scale: number
   /** Opacity (0-1) */
-  opacity: number;
+  opacity: number
   /** CSS display value */
-  display: string;
+  display: string
   /** Z-index for layering */
-  zIndex: number;
+  zIndex: number
   /** Width in pixels */
-  width: number;
+  width: number
   /** Height in pixels */
-  height: number;
+  height: number
   /** Whether the card is currently being dragged */
-  isDragging: boolean;
+  isDragging: boolean
 }
 
 /**
  * Touch/Mouse event type union
  */
-export type DragEvent = MouseEvent | TouchEvent;
+export type DragEvent = MouseEvent | TouchEvent
 
 /**
  * Card stack component props
  */
 export interface CardStackProps<T extends BaseCardData = BaseCardData> {
   /** Array of card data */
-  cards: T[];
+  cards: T[]
   /** Width of individual cards in pixels */
-  cardWidth?: number;
+  cardWidth?: number
   /** Height of individual cards in pixels */
-  cardHeight?: number;
+  cardHeight?: number
   /** Width of the stack container */
-  stackWidth?: number | string | null;
+  stackWidth?: number | string | null
   /** Sensitivity for drag gestures */
-  sensitivity?: number;
+  sensitivity?: number
   /** Maximum number of visible cards */
-  maxVisibleCards?: number;
+  maxVisibleCards?: number
   /** Scale multiplier for sizing effect */
-  scaleMultiplier?: number;
+  scaleMultiplier?: number
   /** Animation speed in seconds */
-  speed?: number;
+  speed?: number
   /** Horizontal padding */
-  paddingHorizontal?: number;
+  paddingHorizontal?: number
   /** Vertical padding */
-  paddingVertical?: number;
+  paddingVertical?: number
 }
 
 /**
@@ -94,7 +94,7 @@ export interface CardStackProps<T extends BaseCardData = BaseCardData> {
  */
 export interface CardStackEmits {
   /** Emitted when cards are being moved/dragged */
-  move: [value: number];
+  move: [value: number]
 }
 
 /**
@@ -102,11 +102,11 @@ export interface CardStackEmits {
  */
 export interface NavSlotProps {
   /** Current active card index */
-  activeCardIndex: number;
+  activeCardIndex: number
   /** Function to move to next card */
-  onNext: () => void;
+  onNext: () => void
   /** Function to move to previous card */
-  onPrevious: () => void;
+  onPrevious: () => void
 }
 
 /**
@@ -115,9 +115,9 @@ export interface NavSlotProps {
 export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
   /** Card data with internal properties and custom data separated */
   card: InternalCard & {
-    $index: number;
-    data: Omit<T, keyof BaseCardData>;
-  };
+    $index: number
+    data: Omit<T, keyof BaseCardData>
+  }
 }
 
 /**
@@ -125,7 +125,7 @@ export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
  */
 export interface CardStackSlots<T extends BaseCardData = BaseCardData> {
   /** Card slot for rendering individual cards */
-  card: (props: CardSlotProps<T>) => any;
+  card: (props: CardSlotProps<T>) => any
   /** Navigation slot for custom navigation controls */
-  nav: (props: NavSlotProps) => any;
+  nav: (props: NavSlotProps) => any
 }

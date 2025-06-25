@@ -17,10 +17,13 @@
     "typescript-eslint": "^8.35.0"
   },
   "devDependencies": {
+    "@card-stack/prettier-config": "workspace:*",
+    "@card-stack/tsconfig": "workspace:*",
     "@eslint/js": "^9.29.0",
     "eslint": "^9.27.0",
     "globals": "^16.2.0",
     "typescript": "^5.5.0",
     "vue-eslint-parser": "^10.1.4"
-  }
+  },
+  "prettier": "@card-stack/prettier-config"
 }

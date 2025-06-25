@@ -7,7 +7,11 @@ const config = {
   printWidth: 100,
   bracketSpacing: true,
   endOfLine: 'lf',
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: [
+    'prettier-plugin-vue',
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss'
+  ],
   overrides: [
     {
       files: '*.vue',
@@ -15,7 +19,8 @@ const config = {
         parser: 'vue'
       }
     }
-  ]
+  ],
+  vueIndentScriptAndStyle: true
 }
 
-export default config 
+export default config

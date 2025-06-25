@@ -1,23 +1,24 @@
-import VueCardStack from "./components/VueCardStack.vue";
-export * from "./types";
-export { createVueCardStack } from "./components/VueCardStackDefineComponent";
+import VueCardStack from './components/VueCardStack.vue'
+
+export * from './types'
+export { createVueCardStack } from './components/VueCardStackDefineComponent'
 
 // Export the component
-export { VueCardStack };
+export { VueCardStack }
 
 export const VueCardStackPlugin = {
   install: (app: any) => {
-    app.component("VueCardStack", VueCardStack);
-  },
-};
+    app.component('VueCardStack', VueCardStack)
+  }
+}
 
 // For Vue.use() support
 declare global {
   interface Window {
-    Vue?: any;
+    Vue?: any
   }
 }
 
-if (typeof window !== "undefined" && window.Vue) {
-  window.Vue.component("VueCardStack", VueCardStack);
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.component('VueCardStack', VueCardStack)
 }
