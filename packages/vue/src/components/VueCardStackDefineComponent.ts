@@ -1,6 +1,6 @@
 import type { BaseCardData } from '../types'
-import type { VNode } from 'vue'
 import VueCardStack from './VueCardStack.vue'
+import type { VNode } from 'vue'
 
 /**
  * Type-safe VueCardStack component with generic support
@@ -39,7 +39,11 @@ export function createVueCardStack<T extends BaseCardData = BaseCardData>() {
             data: Omit<T, keyof BaseCardData>
           }
         }) => VNode | null
-        nav: (props: { activeCardIndex: number; onNext: () => void; onPrevious: () => void }) => VNode | null
+        nav: (props: {
+          activeCardIndex: number
+          onNext: () => void
+          onPrevious: () => void
+        }) => VNode | null
       }
     }
   }

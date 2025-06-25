@@ -1,5 +1,5 @@
-import type { App } from 'vue'
 import VueCardStack from './components/VueCardStack.vue'
+import type { App } from 'vue'
 
 export * from './types'
 export { createVueCardStack } from './components/VueCardStackDefineComponent'

@@ -13,17 +13,14 @@ export default [
       'vue/script-setup-uses-vars': 'error',
       'vue/no-unused-components': 'error',
       'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-      'vue/html-self-closing': [
-        'error',
-        {
-          html: {
-            void: 'always',
-            normal: 'always',
-            component: 'always'
-          }
-        }
-      ],
-      'vue/multi-word-component-names': 'error'
+      'vue/multi-word-component-names': 'error',
+      // Disable formatting rules that conflict with Prettier
+      'vue/html-indent': 'off',
+      'vue/html-closing-bracket-newline': 'off',
+      'vue/max-attributes-per-line': 'off',
+      'vue/multiline-html-element-content-newline': 'off',
+      'vue/singleline-html-element-content-newline': 'off',
+      'vue/html-self-closing': 'off'
     },
     languageOptions: {
       parser: pluginVue.parser,

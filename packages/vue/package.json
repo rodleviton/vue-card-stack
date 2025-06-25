@@ -22,10 +22,11 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
+    "format": "prettier --check \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
+    "format:fix": "prettier --write \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "vue": "^3.0.0"

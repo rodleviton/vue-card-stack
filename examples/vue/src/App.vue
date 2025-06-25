@@ -30,46 +30,42 @@
 </script>
 
 <template>
+
   <div class="app">
+
     <h1>Vue Card Stack Demo</h1>
-    <VueCardStack
+     <VueCardStack
       :cards="cards"
       :stack-width="460"
       :card-width="300"
       :card-height="460"
       :max-visible-cards="6"
       @move="onMove"
-    >
-      <template #card="{ card }">
-        <div
-          class="card"
-          :style="{ background: card.data.background }"
+      > <template #card="{ card }"
         >
-          <!-- Now card.data.background is fully typed and separated from internal props -->
-          <p v-if="card.data.title">
-            {{ card.data.title }}
-          </p>
+        <div class="card" :style="{ background: card.data.background }">
+           <!-- Now card.data.background is fully typed and separated from internal props -->
+          <p v-if="card.data.title"> {{ card.data.title }} </p>
+
         </div>
-      </template> <template #nav="{ activeCardIndex, onNext, onPrevious }">
+         </template
+      > <template #nav="{ activeCardIndex, onNext, onPrevious }"
+        >
         <nav class="nav">
-          <div class="counter">
-            {{ (activeCardIndex ?? 0) + 1 }}/{{ cards.length }}
-          </div>
-          <button
-            class="button"
-            @click="onPrevious"
-          >
-            Previous
-          </button> <button
+
+          <div class="counter"> {{ (activeCardIndex ?? 0) + 1 }}/{{ cards.length }} </div>
+           <button class="button" @click="onPrevious"> Previous </button> <button
             class="button"
             @click="onNext"
           >
-            Next
-          </button>
+             Next </button
+          >
         </nav>
-      </template>
-    </VueCardStack>
+         </template
+      > </VueCardStack
+    >
   </div>
+
 </template>
 
 <style>
