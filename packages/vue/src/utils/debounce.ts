@@ -1,10 +1,11 @@
 /**
- * Creates a debounced function that delays invoking the provided function
- * until after wait milliseconds have elapsed since the last time the debounced function was invoked.
+ * Returns a debounced version of the given function that delays its execution until after a specified wait time has elapsed since the last call.
+ *
+ * The debounced function postpones invoking the original function until no calls have been made for the specified number of milliseconds.
  *
  * @param func - The function to debounce
- * @param wait - The number of milliseconds to delay
- * @returns A debounced version of the function
+ * @param wait - The delay in milliseconds before invoking the function
+ * @returns A debounced function that delays execution of `func`
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
@@ -24,12 +25,13 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 /**
- * Creates a throttled function that only invokes the provided function
- * at most once per every wait milliseconds.
+ * Returns a throttled version of the given function that invokes at most once per specified interval.
  *
- * @param func - The function to throttle
- * @param wait - The number of milliseconds to throttle invocations to
- * @returns A throttled version of the function
+ * The throttled function calls the original function immediately on the first call, then ignores subsequent calls until the wait period has elapsed.
+ *
+ * @param func - The function to be throttled
+ * @param wait - The minimum interval in milliseconds between allowed invocations
+ * @returns A throttled function that enforces the specified invocation interval
  */
 export function throttle<T extends (...args: any[]) => any>(
   func: T,

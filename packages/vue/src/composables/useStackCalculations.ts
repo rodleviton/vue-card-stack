@@ -2,7 +2,11 @@ import { computed, type Ref } from "vue";
 import type { CardStackConfig, BaseCardData } from "../types";
 
 /**
- * Composable for card stack calculations and positioning
+ * Provides reactive calculations for card stack layout, sizing, and positioning in a Vue component.
+ *
+ * Computes stack width, maximum visible cards, scale multipliers, container width, horizontal offsets, rest positions, default card properties, and element X offset for drag interactions, all based on the provided cards, configuration, element reference, container width, and dragging state.
+ *
+ * @returns An object containing computed properties for stack width, maximum visible cards, scale multiplier, container width, X position offset, stack rest points, default card properties, and element X position offset.
  */
 export function useStackCalculations<T extends BaseCardData>(
   cards: Ref<T[]>,
