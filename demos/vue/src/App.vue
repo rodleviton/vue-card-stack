@@ -44,7 +44,7 @@
       > <template #card="{ card }"
         >
         <div class="card" :style="{ background: card.data.background }">
-           <!-- Now card.data.background is fully typed and separated from internal props -->
+
           <p v-if="card.data.title"> {{ card.data.title }} </p>
 
         </div>
