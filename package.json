@@ -8,8 +8,9 @@
     "dev": "turbo dev",
     "test": "turbo test",
     "clean": "turbo clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo lint"
+    "format": "prettier --write \"**/*.{ts,tsx,md,vue}\"",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix"
   },
   "keywords": [
     "card-stack",
@@ -21,8 +22,14 @@
   "author": "Rod Leviton",
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-vue": "^9.0.0",
     "prettier": "^3.2.5",
     "turbo": "^2.5.4",
+    "typescript": "^5.0.0",
     "vite-plugin-dts": "^4.5.4"
   },
   "packageManager": "pnpm@10.11.1"
