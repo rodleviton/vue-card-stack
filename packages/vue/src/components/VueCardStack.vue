@@ -52,19 +52,29 @@ const {
 </script>
 
 <template>
-  <div class="vue-card-stack__wrapper" ref="elementRef">
+  <div 
+    ref="elementRef"
+    :style="{
+      position: 'relative'
+    }"
+  >
     <div
-      class="vue-card-stack__stack"
       :style="{
+        position: 'relative',
+        overflow: 'hidden',
         height: `${props.cardHeight + props.paddingVertical * 2}px`,
         width: containerWidth,
       }"
     >
       <div
-        class="vue-card-stack__card"
         v-for="(card, index) in stack"
         :key="card._id"
         :style="{
+          position: 'absolute',
+          transformOrigin: '0 50%',
+          cursor: 'grab',
+          left: 0,
+          top: 0,
           opacity: card.opacity,
           display: card.display,
           width: `${card.width}px`,
@@ -89,23 +99,4 @@ const {
       :on-previous="onPrevious"
     />
   </div>
-</template>
-
-<style scoped>
-.vue-card-stack__wrapper {
-  position: relative;
-}
-
-.vue-card-stack__stack {
-  position: relative;
-  overflow: hidden;
-}
-
-.vue-card-stack__card {
-  position: absolute;
-  transform-origin: 0 50%;
-  cursor: grab;
-  left: 0;
-  top: 0;
-}
-</style> 
+</template> 

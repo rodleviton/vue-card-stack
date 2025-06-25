@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { VueCardStack } from '@card-stack/vue'
-import '@card-stack/vue/dist/style.css'
 import { ref } from 'vue'
 import type { CardData } from './types'
 
