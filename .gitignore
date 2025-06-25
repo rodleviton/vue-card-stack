@@ -1,19 +1,46 @@
-.DS_Store
+# Dependencies
 node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Build outputs
 dist
+build
+.next
+out
+.nuxt
+.svelte-kit
 
-# local env files
-.env.local
-.env.*.local
+# Turbo
+.turbo
 
-# Log files
+# Environment
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache
+.mf
+.rollup.cache
+tsconfig.tsbuildinfo
+
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-.vscode
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj

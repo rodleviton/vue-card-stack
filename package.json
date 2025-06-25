@@ -4,9 +4,12 @@
   "version": "0.0.1",
   "description": "A framework-agnostic card stack component",
   "scripts": {
-    "build": "pnpm -r build",
-    "dev": "pnpm -r dev",
-    "test": "pnpm -r test"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "clean": "turbo clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo lint"
   },
   "keywords": [
     "card-stack",
@@ -18,6 +21,9 @@
   "author": "Rod Leviton",
   "license": "MIT",
   "devDependencies": {
+    "prettier": "^3.2.5",
+    "turbo": "^2.5.4",
     "vite-plugin-dts": "^4.5.4"
-  }
+  },
+  "packageManager": "pnpm@10.11.1"
 }

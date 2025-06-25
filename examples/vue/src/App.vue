@@ -9,7 +9,7 @@ const VueCardStack = createVueCardStack<CardData>()
 const cards = ref<CardData[]>([
   { background: '#00659d' },
   { background: '#00abbc' },
-  { background: '#e2c58a' },
+  { background: '#e2c58a', title: 'Card 1' },
   { background: '#fc8890' },
   { background: '#b35d7f' },
   { background: '#00659d' },
