@@ -49,14 +49,12 @@
 </script>
 
 <template>
-
   <div
     ref="elementRef"
     :style="{
       position: 'relative'
     }"
   >
-
     <div
       :style="{
         position: 'relative',
@@ -65,7 +63,6 @@
         width: containerWidth
       }"
     >
-
       <div
         v-for="(card, index) in stack"
         :key="card._id"
@@ -89,7 +86,7 @@
           `
         }"
       >
-         <slot
+        <slot
           name="card"
           :card="{
             ...card,
@@ -98,15 +95,13 @@
           }"
         />
       </div>
-
     </div>
-     <slot
+    <slot
       name="nav"
       :active-card-index="originalActiveCardIndex"
       :on-next="onNext"
       :on-previous="onPrevious"
     />
   </div>
-
 </template>
 
