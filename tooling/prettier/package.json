@@ -3,17 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "main": "base.mjs",
-  "exports": {
-    ".": {
-      "import": "./base.mjs",
-      "require": "./base.cjs"
-    },
-    "./vue": {
-      "import": "./vue.mjs",
-      "require": "./vue.cjs"
-    }
-  },
+  "main": "index.mjs",
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check \"**/*.{mjs,json}\"",
@@ -29,5 +19,5 @@
     "@card-stack/tsconfig": "workspace:*",
     "typescript": "^5.5.0"
   },
-  "prettier": "./base.mjs"
+  "prettier": "./index.mjs"
 }

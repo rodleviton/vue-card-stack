@@ -1,51 +1,51 @@
 <script setup lang="ts" generic="T extends BaseCardData">
-  import { useCardStack } from '../composables/useCardStack'
-  import type { CardStackProps, CardStackEmits, CardStackConfig, BaseCardData } from '../types'
-  import { ref, toRef } from 'vue';
+import { useCardStack } from '../composables/useCardStack'
+import type { CardStackProps, CardStackEmits, CardStackConfig, BaseCardData } from '../types'
+import { ref, toRef } from 'vue'
 
-  // Props with defaults
-  const props = withDefaults(defineProps<CardStackProps<T>>(), {
-    cardWidth: 300,
-    cardHeight: 400,
-    stackWidth: null,
-    sensitivity: 0.25,
-    maxVisibleCards: 10,
-    scaleMultiplier: 0.5,
-    speed: 0.2,
-    paddingHorizontal: 20,
-    paddingVertical: 20
-  })
+// Props with defaults
+const props = withDefaults(defineProps<CardStackProps<T>>(), {
+  cardWidth: 300,
+  cardHeight: 400,
+  stackWidth: null,
+  sensitivity: 0.25,
+  maxVisibleCards: 10,
+  scaleMultiplier: 0.5,
+  speed: 0.2,
+  paddingHorizontal: 20,
+  paddingVertical: 20
+})
 
-  // Emits
-  const emit = defineEmits<CardStackEmits>()
+// Emits
+const emit = defineEmits<CardStackEmits>()
 
-  // Template ref
-  const elementRef = ref<HTMLElement | null>(null)
+// Template ref
+const elementRef = ref<HTMLElement | null>(null)
 
-  // Convert props to config ref for composable
-  const config = toRef(
-    () =>
-      ({
-        cardWidth: props.cardWidth,
-        cardHeight: props.cardHeight,
-        stackWidth: props.stackWidth,
-        sensitivity: props.sensitivity,
-        maxVisibleCards: props.maxVisibleCards,
-        scaleMultiplier: props.scaleMultiplier,
-        speed: props.speed,
-        paddingHorizontal: props.paddingHorizontal,
-        paddingVertical: props.paddingVertical
-      }) satisfies CardStackConfig
+// Convert props to config ref for composable
+const config = toRef(
+  () =>
+    ({
+      cardWidth: props.cardWidth,
+      cardHeight: props.cardHeight,
+      stackWidth: props.stackWidth,
+      sensitivity: props.sensitivity,
+      maxVisibleCards: props.maxVisibleCards,
+      scaleMultiplier: props.scaleMultiplier,
+      speed: props.speed,
+      paddingHorizontal: props.paddingHorizontal,
+      paddingVertical: props.paddingVertical
+    }) satisfies CardStackConfig
+)
+
+// Use card stack composable
+const { stack, containerWidth, originalActiveCardIndex, isDragging, onNext, onPrevious } =
+  useCardStack<T>(
+    toRef(() => props.cards),
+    config,
+    elementRef,
+    emit
   )
-
-  // Use card stack composable
-  const { stack, containerWidth, originalActiveCardIndex, isDragging, onNext, onPrevious } =
-    useCardStack<T>(
-      toRef(() => props.cards),
-      config,
-      elementRef,
-      emit
-    )
 </script>
 
 <template>
