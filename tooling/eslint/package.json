@@ -1,20 +1,26 @@
 {
-  "name": "@card-stack/eslint",
+  "name": "@card-stack/eslint-config",
   "version": "0.0.1",
   "private": true,
-  "main": "index.js",
+  "type": "module",
+  "files": [
+    "./index.js"
+  ],
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "format": "prettier --check \"**/*.{js,json}\""
+  },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-config-turbo": "^1.12.4",
-    "eslint-plugin-vue": "^9.0.0"
+    "@types/eslint": "9.6.1",
+    "eslint-config-turbo": "^2.5.3",
+    "eslint-plugin-vue": "^9.33.0",
+    "typescript-eslint": "^8.35.0"
   },
   "devDependencies": {
-    "eslint": "^8.0.0",
-    "typescript": "^5.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@eslint/js": "^9.29.0",
+    "eslint": "^9.27.0",
+    "globals": "^16.2.0",
+    "typescript": "^5.8.3",
+    "vue-eslint-parser": "^10.1.4"
   }
 }

@@ -20,7 +20,10 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "lint": "eslint \"src/**/*.ts*\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -29,15 +32,16 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^20.0.0",
+    "@card-stack/eslint-config": "workspace:*",
+    "@card-stack/prettier-config": "workspace:*",
+    "@types/node": "^22.13.14",
     "@vitejs/plugin-vue": "^5.0.0",
-    "eslint": "^8.0.0",
-    "eslint-config-turbo": "^1.12.4",
-    "typescript": "^5.0.0",
+    "typescript": "^5.8.3",
     "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.0.0",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^1.0.0",
     "vue": "^3.4.0",
     "vue-tsc": "^1.8.0"
-  }
+  },
+  "prettier": "@card-stack/prettier-config"
 }

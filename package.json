@@ -4,13 +4,14 @@
   "version": "0.0.1",
   "description": "A framework-agnostic card stack component",
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "test": "turbo test",
-    "clean": "turbo clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md,vue}\"",
-    "lint": "turbo lint",
-    "lint:fix": "turbo lint -- --fix"
+    "build": "turbo build --cache-dir=.turbo",
+    "clean": "git clean -xdf node_modules dist",
+    "clean:workspaces": "turbo clean",
+    "dev": "cross-env FORCE_COLOR=1 turbo dev --parallel",
+    "format": "turbo format --cache-dir=.turbo --continue -- --cache --cache-location=\"node_modules/.cache/.prettiercache\" --ignore-path=\"../../.gitignore\"",
+    "format:fix": "turbo format --cache-dir=.turbo --continue -- --write --no-cache --cache-location=\"node_modules/.cache/.prettiercache\" --ignore-path=\"../../.gitignore\"",
+    "lint": "turbo lint --cache-dir=.turbo --affected --continue -- --cache --cache-location \"node_modules/.cache/.eslintcache\" && manypkg check",
+    "lint:fix": "turbo lint --cache-dir=.turbo --affected --continue -- --fix --cache --cache-location \"node_modules/.cache/.eslintcache\" && manypkg fix"
   },
   "keywords": [
     "card-stack",
@@ -22,14 +23,18 @@
   "author": "Rod Leviton",
   "license": "MIT",
   "devDependencies": {
+    "@manypkg/cli": "^0.23.0",
+    "@turbo/gen": "^2.5.4",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
-    "eslint": "^8.0.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^9.27.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-vue": "^9.0.0",
-    "prettier": "^3.2.5",
+    "husky": "^9.1.7",
+    "prettier": "^3.5.3",
     "turbo": "^2.5.4",
-    "typescript": "^5.0.0",
+    "typescript": "^5.8.3",
     "vite-plugin-dts": "^4.5.4"
   },
   "packageManager": "pnpm@10.11.1"
