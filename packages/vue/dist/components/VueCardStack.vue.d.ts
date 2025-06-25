@@ -10,6 +10,7 @@ declare const _default: <T extends BaseCardData>(__VLS_props: Awaited<typeof __V
         card?(_: {
             card: T & {
                 $index: number;
+                data: Omit<T & import('..').InternalCard, "_id" | "_index">;
                 _id: number;
                 _index: number;
                 xPos: number;

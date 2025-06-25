@@ -89,7 +89,11 @@ const {
           `,
         }"
       >
-        <slot name="card" v-bind:card="{ ...card, $index: index }" />
+        <slot name="card" v-bind:card="{ 
+          ...card, 
+          $index: index,
+          data: (({ _id, _index, ...rest }) => rest)(card)
+        }" />
       </div>
     </div>
     <slot

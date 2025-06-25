@@ -22,7 +22,7 @@ export function createVueCardStack<T extends BaseCardData = BaseCardData>() {
       };
       $slots: {
         card: (props: {
-          card: T & {
+          card: {
             _id: number;
             _index: number;
             xPos: number;
@@ -35,6 +35,7 @@ export function createVueCardStack<T extends BaseCardData = BaseCardData>() {
             height: number;
             isDragging: boolean;
             $index: number;
+            data: Omit<T, keyof BaseCardData>;
           };
         }) => any;
         nav: (props: {

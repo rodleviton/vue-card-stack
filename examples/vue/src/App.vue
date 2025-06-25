@@ -44,10 +44,10 @@ const onMove = (value: number) => {
       <template #card="{ card }">
         <div 
           class="card"
-          :style="{ background: card.background }"
+          :style="{ background: card.data.background }"
         >
-          <!-- Now card.background is fully typed and accessible -->
-          <p v-if="card.title">{{ card.title }}</p>
+          <!-- Now card.data.background is fully typed and separated from internal props -->
+          <p v-if="card.data.title">{{ card.data.title }}</p>
         </div>
       </template>
 

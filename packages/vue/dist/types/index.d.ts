@@ -106,9 +106,10 @@ export interface NavSlotProps {
  * Card slot props - Generic type that preserves custom card properties
  */
 export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
-    /** Card data with internal properties and custom properties */
-    card: T & InternalCard & {
+    /** Card data with internal properties and custom data separated */
+    card: InternalCard & {
         $index: number;
+        data: Omit<T, keyof BaseCardData>;
     };
 }
 /**
