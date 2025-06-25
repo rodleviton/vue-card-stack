@@ -2,7 +2,9 @@ import { computed, ref, type Ref } from "vue";
 import type { DragEvent, CardStackConfig } from "../types";
 
 /**
- * Composable for handling drag and touch interactions
+ * Provides reactive state and utility methods for managing drag and touch interactions in a card stack UI.
+ *
+ * Exposes state variables, computed event names, and methods to handle drag lifecycle, direction detection, and threshold checks for card changes.
  */
 export function useDragHandling(
   config: Ref<CardStackConfig>,

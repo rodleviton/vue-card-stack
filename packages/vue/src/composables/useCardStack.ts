@@ -18,7 +18,15 @@ import { useDragHandling } from "./useDragHandling";
 import { debounce } from "../utils/debounce";
 
 /**
- * Main composable for card stack functionality
+ * Provides reactive state and interaction logic for a draggable, swipeable card stack UI component.
+ *
+ * Manages card stack initialization, layout recalculation, drag-based navigation, and event handling. Supports cycling through cards, responsive layout updates, and emits normalized move progress during drag interactions.
+ *
+ * @param cards - Reactive reference to the array of card data
+ * @param config - Reactive reference to card stack configuration options
+ * @param elementRef - Reactive reference to the container HTMLElement
+ * @param emit - Function to emit "move" events with a normalized offset value
+ * @returns An object containing the reactive card stack, computed container width, active card index, drag state, and navigation/control methods
  */
 export function useCardStack<T extends BaseCardData>(
   cards: Ref<T[]>,
