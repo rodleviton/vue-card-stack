@@ -1,9 +1,20 @@
-import baseConfig from './base.mjs'
+/** @typedef  {import("prettier").Config} PrettierConfig */
 
-/** @type {import("prettier").Config} */
+/** @type { PrettierConfig } */
 const config = {
-  ...baseConfig,
-  plugins: [...(baseConfig.plugins || []), 'prettier-plugin-vue'],
+  semi: false,
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'none',
+  printWidth: 100,
+  bracketSpacing: true,
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  plugins: [
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+    'prettier-plugin-vue'
+  ],
   overrides: [
     {
       files: '*.vue',

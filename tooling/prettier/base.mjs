@@ -1,4 +1,6 @@
-/** @type {import("prettier").Config} */
+/** @typedef  {import("prettier").Config} PrettierConfig */
+
+/** @type { PrettierConfig } */
 const config = {
   semi: false,
   singleQuote: true,
@@ -6,7 +8,8 @@ const config = {
   trailingComma: 'none',
   printWidth: 100,
   bracketSpacing: true,
-  endOfLine: 'lf',
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
   plugins: ['@trivago/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss']
 }
 
