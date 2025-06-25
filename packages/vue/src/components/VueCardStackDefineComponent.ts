@@ -1,4 +1,5 @@
 import type { BaseCardData } from '../types'
+import type { VNode } from 'vue'
 import VueCardStack from './VueCardStack.vue'
 
 /**
@@ -37,8 +38,8 @@ export function createVueCardStack<T extends BaseCardData = BaseCardData>() {
             $index: number
             data: Omit<T, keyof BaseCardData>
           }
-        }) => any
-        nav: (props: { activeCardIndex: number; onNext: () => void; onPrevious: () => void }) => any
+        }) => VNode | null
+        nav: (props: { activeCardIndex: number; onNext: () => void; onPrevious: () => void }) => VNode | null
       }
     }
   }

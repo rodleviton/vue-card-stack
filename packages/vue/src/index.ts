@@ -1,3 +1,4 @@
+import type { App } from 'vue'
 import VueCardStack from './components/VueCardStack.vue'
 
 export * from './types'
@@ -7,7 +8,7 @@ export { createVueCardStack } from './components/VueCardStackDefineComponent'
 export { VueCardStack }
 
 export const VueCardStackPlugin = {
-  install: (app: any) => {
+  install: (app: App) => {
     app.component('VueCardStack', VueCardStack)
   }
 }
@@ -15,7 +16,7 @@ export const VueCardStackPlugin = {
 // For Vue.use() support
 declare global {
   interface Window {
-    Vue?: any
+    Vue?: App
   }
 }
 

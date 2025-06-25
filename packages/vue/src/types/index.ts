@@ -1,3 +1,5 @@
+import type { VNode } from 'vue'
+
 /**
  * Base card data interface that all card types must extend
  */
@@ -125,7 +127,7 @@ export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
  */
 export interface CardStackSlots<T extends BaseCardData = BaseCardData> {
   /** Card slot for rendering individual cards */
-  card: (props: CardSlotProps<T>) => any
+  card: (props: CardSlotProps<T>) => VNode | null
   /** Navigation slot for custom navigation controls */
-  nav: (props: NavSlotProps) => any
+  nav: (props: NavSlotProps) => VNode | null
 }
