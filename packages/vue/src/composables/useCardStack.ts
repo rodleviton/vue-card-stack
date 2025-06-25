@@ -1,8 +1,8 @@
-import type { CardStackConfig, InternalCard, DragEvent, BaseCardData } from '../types'
+import type { BaseCardData, CardStackConfig, DragEvent, InternalCard } from '../types'
 import { debounce } from '../utils/debounce'
 import { useDragHandling } from './useDragHandling'
 import { useStackCalculations } from './useStackCalculations'
-import { ref, computed, nextTick, onMounted, onBeforeUnmount, shallowRef, type Ref } from 'vue'
+import { type Ref, computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef } from 'vue'
 
 /**
  * Main composable for card stack functionality

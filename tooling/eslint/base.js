@@ -1,7 +1,7 @@
-import eslint from '@eslint/js';
-import tsEslint from 'typescript-eslint';
-import globals from 'globals';
-import turboConfig from 'eslint-config-turbo/flat';
+import eslint from '@eslint/js'
+import turboConfig from 'eslint-config-turbo/flat'
+import globals from 'globals'
+import tsEslint from 'typescript-eslint'
 
 export default tsEslint.config(
   eslint.configs.recommended,
@@ -26,10 +26,6 @@ export default tsEslint.config(
     }
   },
   {
-    ignores: [
-      '**/node_modules',
-      'dist',
-      'pnpm-lock.yaml'
-    ]
+    ignores: ['**/node_modules', 'dist', 'pnpm-lock.yaml']
   }
-);
+)

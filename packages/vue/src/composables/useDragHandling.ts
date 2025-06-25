@@ -1,5 +1,5 @@
-import type { DragEvent, CardStackConfig } from '../types'
-import { computed, ref, type Ref } from 'vue'
+import type { CardStackConfig, DragEvent } from '../types'
+import { type Ref, computed, ref } from 'vue'
 
 /**
  * Composable for handling drag and touch interactions

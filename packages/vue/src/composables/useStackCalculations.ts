@@ -1,5 +1,5 @@
-import type { CardStackConfig, BaseCardData } from '../types'
-import { computed, type Ref } from 'vue'
+import type { BaseCardData, CardStackConfig } from '../types'
+import { type Ref, computed } from 'vue'
 
 /**
  * Composable for card stack calculations and positioning
