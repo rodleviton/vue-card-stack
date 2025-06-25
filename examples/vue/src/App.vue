@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { VueCardStack } from '@card-stack/vue'
+import { createVueCardStack } from '@card-stack/vue'
 import { ref } from 'vue'
 import type { CardData } from './types'
+
+// Create a strongly typed component for our CardData
+const VueCardStack = createVueCardStack<CardData>()
 
 const cards = ref<CardData[]>([
   { background: '#00659d' },
@@ -43,6 +46,8 @@ const onMove = (value: number) => {
           class="card"
           :style="{ background: card.background }"
         >
+          <!-- Now card.background is fully typed and accessible -->
+          <p v-if="card.title">{{ card.title }}</p>
         </div>
       </template>
 
@@ -72,9 +77,16 @@ const onMove = (value: number) => {
   height: 100%;
   border-radius: 8px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
+}
+
+.card p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .nav {

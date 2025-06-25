@@ -1,4 +1,4 @@
-import { computed as p, ref as W, shallowRef as X, onMounted as I, onBeforeUnmount as O, nextTick as R, defineComponent as B, toRef as V, createElementBlock as H, openBlock as S, createElementVNode as N, renderSlot as T, normalizeStyle as b, unref as w, Fragment as Y, renderList as A } from "vue";
+import { computed as p, ref as W, shallowRef as X, onMounted as I, onBeforeUnmount as O, nextTick as R, defineComponent as B, toRef as T, createElementBlock as z, openBlock as H, createElementVNode as N, renderSlot as b, normalizeStyle as $, unref as w, Fragment as Y, renderList as A } from "vue";
 function F(r, e, t, v, n) {
   const o = p(() => {
     var g;
@@ -29,7 +29,7 @@ function F(r, e, t, v, n) {
       zIndex: r.value.length - a,
       isDragging: n.value
     };
-  })), k = p(() => {
+  })), D = p(() => {
     var g;
     return ((g = t.value) == null ? void 0 : g.getBoundingClientRect().x) || 0;
   });
@@ -41,7 +41,7 @@ function F(r, e, t, v, n) {
     xPosOffset: m,
     stackRestPoints: c,
     cardDefaults: f,
-    elementXPosOffset: k
+    elementXPosOffset: D
   };
 }
 function U(r, e) {
@@ -69,18 +69,18 @@ function U(r, e) {
     },
     updateDrag: (d) => {
       if (!t.value) return null;
-      const D = c(d) - e.value;
-      return o.value = D > v.value, {
-        dragXPos: D,
-        activeCardOffset: D - v.value
+      const k = c(d) - e.value;
+      return o.value = k > v.value, {
+        dragXPos: k,
+        activeCardOffset: k - v.value
       };
     },
     endDrag: () => {
       t.value = !1, v.value = 0, n.value = 0;
     },
     shouldChangeCard: (d) => {
-      const D = (r.value.cardWidth + r.value.paddingHorizontal) / (1 / r.value.sensitivity);
-      return Math.abs(d) > D;
+      const k = (r.value.cardWidth + r.value.paddingHorizontal) / (1 / r.value.sensitivity);
+      return Math.abs(d) > k;
     },
     resetDragState: () => {
       t.value = !1, v.value = 0, n.value = 0, o.value = !1;
@@ -106,12 +106,12 @@ function q(r, e, t, v) {
   ), s = U(e, i.elementXPosOffset), m = () => {
     const l = [...r.value], h = l.pop();
     h && l.unshift(h), n.value = l.map((x, y) => {
-      const z = i.cardDefaults.value[y];
+      const S = i.cardDefaults.value[y];
       return {
         _id: Date.now() + y,
         _index: y,
         ...x,
-        ...z
+        ...S
       };
     });
   }, c = () => {
@@ -126,7 +126,7 @@ function q(r, e, t, v) {
     });
   }, f = j(() => {
     t.value && (o.value = t.value.clientWidth, c());
-  }, 250), k = () => {
+  }, 250), D = () => {
     const l = n.value.shift();
     l && n.value.push(l), c();
   }, g = () => {
@@ -138,7 +138,7 @@ function q(r, e, t, v) {
       "move",
       h / (e.value.cardWidth + e.value.paddingHorizontal)
     ), u.value = s.isDraggingRight.value ? 1 : 0, n.value = n.value.map((x, y) => {
-      const z = y === u.value, P = i.cardDefaults.value[y], L = z ? (P.xPos ?? 0) + h : (P.xPos ?? 0) + i.xPosOffset.value / (e.value.cardWidth + e.value.paddingHorizontal) * h, M = z ? P.scale ?? 1 : (P.scale ?? 1) + i.scaleMultiplier.value / (e.value.cardWidth + e.value.paddingHorizontal) * h;
+      const S = y === u.value, P = i.cardDefaults.value[y], L = S ? (P.xPos ?? 0) + h : (P.xPos ?? 0) + i.xPosOffset.value / (e.value.cardWidth + e.value.paddingHorizontal) * h, M = S ? P.scale ?? 1 : (P.scale ?? 1) + i.scaleMultiplier.value / (e.value.cardWidth + e.value.paddingHorizontal) * h;
       return {
         ...x,
         ...P,
@@ -149,12 +149,12 @@ function q(r, e, t, v) {
     });
   }, C = () => {
     const l = n.value[u.value], h = i.stackRestPoints.value[u.value], x = l.xPos - h;
-    v("move", 0), s.shouldChangeCard(x) ? s.isDraggingRight.value ? k() : g() : c();
+    v("move", 0), s.shouldChangeCard(x) ? s.isDraggingRight.value ? D() : g() : c();
   }, E = (l) => {
-    s.startDrag(l), document.addEventListener(s.dragEvent.value, D);
+    s.startDrag(l), document.addEventListener(s.dragEvent.value, k);
   }, d = () => {
-    s.endDrag(), document.removeEventListener(s.dragEvent.value, D), C();
-  }, D = (l) => {
+    s.endDrag(), document.removeEventListener(s.dragEvent.value, k), C();
+  }, k = (l) => {
     const h = s.updateDrag(l);
     h && a(h.dragXPos);
   }, _ = p(() => {
@@ -170,7 +170,7 @@ function q(r, e, t, v) {
     window.removeEventListener("resize", f), t.value && t.value.removeEventListener(
       s.touchStartEvent.value,
       E
-    ), document.removeEventListener(s.touchEndEvent.value, d), document.removeEventListener(s.dragEvent.value, D);
+    ), document.removeEventListener(s.touchEndEvent.value, d), document.removeEventListener(s.dragEvent.value, k);
   }), {
     // State
     stack: n,
@@ -181,14 +181,14 @@ function q(r, e, t, v) {
     // Drag state
     isDragging: s.isDragging,
     // Methods
-    onNext: k,
+    onNext: D,
     onPrevious: g,
     // For advanced usage
     init: m,
     rebuild: c
   };
 }
-const $ = /* @__PURE__ */ B({
+const V = /* @__PURE__ */ B({
   __name: "VueCardStack",
   props: {
     cards: {},
@@ -204,7 +204,7 @@ const $ = /* @__PURE__ */ B({
   },
   emits: ["move"],
   setup(r, { emit: e }) {
-    const t = r, v = e, n = W(null), o = V(() => ({
+    const t = r, v = e, n = W(null), o = T(() => ({
       cardWidth: t.cardWidth,
       cardHeight: t.cardHeight,
       stackWidth: t.stackWidth,
@@ -222,12 +222,12 @@ const $ = /* @__PURE__ */ B({
       onNext: c,
       onPrevious: f
     } = q(
-      V(() => t.cards),
+      T(() => t.cards),
       o,
       n,
       v
     );
-    return (k, g) => (S(), H("div", {
+    return (D, g) => (H(), z("div", {
       ref_key: "elementRef",
       ref: n,
       style: {
@@ -235,16 +235,16 @@ const $ = /* @__PURE__ */ B({
       }
     }, [
       N("div", {
-        style: b({
+        style: $({
           position: "relative",
           overflow: "hidden",
           height: `${t.cardHeight + t.paddingVertical * 2}px`,
           width: w(i)
         })
       }, [
-        (S(!0), H(Y, null, A(w(u), (a, C) => (S(), H("div", {
+        (H(!0), z(Y, null, A(w(u), (a, C) => (H(), z("div", {
           key: a._id,
-          style: b({
+          style: $({
             position: "absolute",
             transformOrigin: "0 50%",
             cursor: "grab",
@@ -262,25 +262,30 @@ const $ = /* @__PURE__ */ B({
           `
           })
         }, [
-          T(k.$slots, "card", {
+          b(D.$slots, "card", {
             card: { ...a, $index: C }
           })
         ], 4))), 128))
       ], 4),
-      T(k.$slots, "nav", {
+      b(D.$slots, "nav", {
         activeCardIndex: w(s),
         onNext: w(c),
         onPrevious: w(f)
       })
     ], 512));
   }
-}), J = {
+});
+function J() {
+  return V;
+}
+const K = {
   install: (r) => {
-    r.component("VueCardStack", $);
+    r.component("VueCardStack", V);
   }
 };
-typeof window < "u" && window.Vue && window.Vue.component("VueCardStack", $);
+typeof window < "u" && window.Vue && window.Vue.component("VueCardStack", V);
 export {
-  $ as VueCardStack,
-  J as VueCardStackPlugin
+  V as VueCardStack,
+  K as VueCardStackPlugin,
+  J as createVueCardStack
 };

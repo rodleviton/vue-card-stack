@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends BaseCardData">
 import { ref, toRef } from 'vue'
 import { useCardStack } from '../composables/useCardStack'
 import type { CardStackProps, CardStackEmits, CardStackConfig, BaseCardData } from '../types'
 
 // Props with defaults
-const props = withDefaults(defineProps<CardStackProps<BaseCardData>>(), {
+const props = withDefaults(defineProps<CardStackProps<T>>(), {
   cardWidth: 300,
   cardHeight: 400,
   stackWidth: null,
@@ -43,7 +43,7 @@ const {
   isDragging,
   onNext,
   onPrevious
-} = useCardStack(
+} = useCardStack<T>(
   toRef(() => props.cards),
   config,
   elementRef,
@@ -99,4 +99,4 @@ const {
       :on-previous="onPrevious"
     />
   </div>
-</template> 
+</template>

@@ -1,84 +1,39 @@
 import { CardStackProps, BaseCardData } from '../types';
 
-declare function __VLS_template(): {
-    card?(_: {
-        card: {
-            $index: number;
-            _id: number;
-            _index: number;
-            xPos: number;
-            yPos: number;
-            scale: number;
-            opacity: number;
-            display: string;
-            zIndex: number;
-            width: number;
-            height: number;
-            isDragging: boolean;
-        };
-    }): any;
-    nav?(_: {
-        activeCardIndex: number;
-        onNext: () => void;
-        onPrevious: () => void;
-    }): any;
+declare const _default: <T extends BaseCardData>(__VLS_props: Awaited<typeof __VLS_setup>["props"], __VLS_ctx?: __VLS_Prettify<Pick<Awaited<typeof __VLS_setup>, "attrs" | "emit" | "slots">>, __VLS_expose?: NonNullable<Awaited<typeof __VLS_setup>>["expose"], __VLS_setup?: Promise<{
+    props: __VLS_Prettify<__VLS_OmitKeepDiscriminatedUnion<(Partial<{}> & Omit<{
+        readonly onMove?: ((value: number) => any) | undefined;
+    } & import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps, never>) & CardStackProps<T>, keyof import('vue').VNodeProps | keyof import('vue').AllowedComponentProps>> & {} & (import('vue').VNodeProps & import('vue').AllowedComponentProps & import('vue').ComponentCustomProps);
+    expose(exposed: import('vue').ShallowUnwrapRef<{}>): void;
+    attrs: any;
+    slots: ReturnType<() => {
+        card?(_: {
+            card: T & {
+                $index: number;
+                _id: number;
+                _index: number;
+                xPos: number;
+                yPos: number;
+                scale: number;
+                opacity: number;
+                display: string;
+                zIndex: number;
+                width: number;
+                height: number;
+                isDragging: boolean;
+            };
+        }): any;
+        nav?(_: {
+            activeCardIndex: number;
+            onNext: () => void;
+            onPrevious: () => void;
+        }): any;
+    }>;
+    emit: (evt: "move", value: number) => void;
+}>) => import('vue').VNode & {
+    __ctx?: Awaited<typeof __VLS_setup>;
 };
-declare const __VLS_component: import('vue').DefineComponent<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<BaseCardData>>, {
-    cardWidth: number;
-    cardHeight: number;
-    stackWidth: null;
-    sensitivity: number;
-    maxVisibleCards: number;
-    scaleMultiplier: number;
-    speed: number;
-    paddingHorizontal: number;
-    paddingVertical: number;
-}>>, {}, {}, {}, {}, import('vue').ComponentOptionsMixin, import('vue').ComponentOptionsMixin, {
-    move: (value: number) => void;
-}, string, import('vue').PublicProps, Readonly<import('vue').ExtractPropTypes<__VLS_WithDefaults<__VLS_TypePropsToRuntimeProps<CardStackProps<BaseCardData>>, {
-    cardWidth: number;
-    cardHeight: number;
-    stackWidth: null;
-    sensitivity: number;
-    maxVisibleCards: number;
-    scaleMultiplier: number;
-    speed: number;
-    paddingHorizontal: number;
-    paddingVertical: number;
-}>>> & Readonly<{
-    onMove?: ((value: number) => any) | undefined;
-}>, {
-    cardWidth: number;
-    cardHeight: number;
-    stackWidth: number | string | null;
-    sensitivity: number;
-    maxVisibleCards: number;
-    scaleMultiplier: number;
-    speed: number;
-    paddingHorizontal: number;
-    paddingVertical: number;
-}, {}, {}, {}, string, import('vue').ComponentProvideOptions, true, {}, any>;
-declare const _default: __VLS_WithTemplateSlots<typeof __VLS_component, ReturnType<typeof __VLS_template>>;
 export default _default;
-type __VLS_NonUndefinedable<T> = T extends undefined ? never : T;
-type __VLS_TypePropsToRuntimeProps<T> = {
-    [K in keyof T]-?: {} extends Pick<T, K> ? {
-        type: import('vue').PropType<__VLS_NonUndefinedable<T[K]>>;
-    } : {
-        type: import('vue').PropType<T[K]>;
-        required: true;
-    };
-};
-type __VLS_WithDefaults<P, D> = {
-    [K in keyof Pick<P, keyof P>]: K extends keyof D ? __VLS_Prettify<P[K] & {
-        default: D[K];
-    }> : P[K];
-};
 type __VLS_Prettify<T> = {
     [K in keyof T]: T[K];
 } & {};
-type __VLS_WithTemplateSlots<T, S> = T & {
-    new (): {
-        $slots: S;
-    };
-};

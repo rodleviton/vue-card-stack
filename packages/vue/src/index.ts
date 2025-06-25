@@ -1,7 +1,8 @@
 import VueCardStack from "./components/VueCardStack.vue";
 export * from "./types";
+export { createVueCardStack } from "./components/VueCardStackDefineComponent";
 
-// Export the component and plugin
+// Export the component
 export { VueCardStack };
 
 export const VueCardStackPlugin = {

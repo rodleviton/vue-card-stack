@@ -103,11 +103,20 @@ export interface NavSlotProps {
     onPrevious: () => void;
 }
 /**
- * Card slot props
+ * Card slot props - Generic type that preserves custom card properties
  */
 export interface CardSlotProps<T extends BaseCardData = BaseCardData> {
-    /** Card data with internal properties */
-    card: T & InternalCard;
-    /** Current index in the stack */
-    $index: number;
+    /** Card data with internal properties and custom properties */
+    card: T & InternalCard & {
+        $index: number;
+    };
+}
+/**
+ * Generic slot definitions for the component
+ */
+export interface CardStackSlots<T extends BaseCardData = BaseCardData> {
+    /** Card slot for rendering individual cards */
+    card: (props: CardSlotProps<T>) => any;
+    /** Navigation slot for custom navigation controls */
+    nav: (props: NavSlotProps) => any;
 }
