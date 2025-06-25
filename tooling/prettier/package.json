@@ -3,21 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "main": "index.mjs",
+  "main": "base.mjs",
+  "exports": {
+    ".": {
+      "import": "./base.mjs",
+      "require": "./base.cjs"
+    },
+    "./vue": {
+      "import": "./vue.mjs",
+      "require": "./vue.cjs"
+    }
+  },
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check \"**/*.{mjs,json}\"",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "prettier": "^3.5.3",
-    "prettier-plugin-vue": "^1.1.6",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "prettier-plugin-vue": "^1.1.6"
   },
   "devDependencies": {
     "@card-stack/tsconfig": "workspace:*",
     "typescript": "^5.5.0"
   },
-  "prettier": "./index.mjs"
+  "prettier": "./base.mjs"
 }

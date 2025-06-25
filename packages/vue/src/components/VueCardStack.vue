@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T extends BaseCardData">
   import { useCardStack } from '../composables/useCardStack'
   import type { CardStackProps, CardStackEmits, CardStackConfig, BaseCardData } from '../types'
-  import { ref, toRef } from 'vue'
+  import { ref, toRef } from 'vue';
 
   // Props with defaults
   const props = withDefaults(defineProps<CardStackProps<T>>(), {
