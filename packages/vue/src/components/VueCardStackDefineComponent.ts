@@ -1,6 +1,8 @@
-import type { BaseCardData } from '../types'
-import VueCardStack from './VueCardStack.vue'
 import type { VNode } from 'vue'
+
+import type { BaseCardData } from '../types'
+
+import VueCardStack from './VueCardStack.vue'
 
 /**
  * Type-safe VueCardStack component factory with generic support.

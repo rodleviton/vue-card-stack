@@ -1,29 +1,106 @@
 # @card-stack/prettier-config
 
-Professional Prettier configuration for Vue Card Stack monorepo with TypeScript, Vue 3, and automatic import sorting.
+> Modern Prettier configuration for the Card Stack monorepo with intelligent
+> import sorting and multi-language support.
 
-## 🎯 Features
+## Overview
 
-- **Consistent Formatting**: Unified code style across TypeScript, Vue, and JavaScript
-- **Import Sorting**: Automatic import organization with logical grouping
-- **Vue Support**: Optimized formatting for Vue Single File Components (SFCs)
-- **Tailwind CSS**: Automatic class sorting for Tailwind CSS
-- **JSDoc Preservation**: Maintains documentation formatting
-- **Monorepo Optimized**: Consistent formatting across all packages
-- **Modern Standards**: Optimized for readability and maintainability
+This package provides a comprehensive Prettier configuration that ensures
+consistent code formatting across JavaScript, TypeScript, Vue, and other file
+types, with intelligent import organization and language-specific optimizations.
 
-## 📦 Installation
+## Features
 
-This package is part of the Vue Card Stack monorepo and is used internally. For external projects, you can use it as a reference or fork it.
+### 🎨 **Consistent Formatting**
 
-```bash
-# If using in an external project
-pnpm add -D @card-stack/prettier-config
+- Modern formatting standards aligned with current best practices
+- Language-specific optimizations for Vue, JSON, Markdown, and YAML
+- Intelligent import sorting with logical grouping
+- Tailwind CSS class organization
+
+### 📦 **Import Organization**
+
+- Automatic import sorting with intelligent grouping
+- Separation of external packages, internal modules, and relative imports
+- Type-only import handling for TypeScript
+- Merge duplicate imports for cleaner code
+
+### 🔧 **Multi-Language Support**
+
+- Vue SFC (Single File Component) formatting
+- JSON and JSONC with appropriate line lengths
+- Markdown with prose wrapping
+- YAML with proper indentation
+
+## Configuration
+
+### Core Settings
+
+```js
+{
+  semi: false,              // No semicolons
+  singleQuote: true,        // Single quotes for strings
+  tabWidth: 2,              // 2-space indentation
+  trailingComma: 'none',    // No trailing commas
+  printWidth: 100,          // 100 character line limit
+  endOfLine: 'lf'           // Unix line endings
+}
 ```
 
-## 🚀 Usage
+### Import Sorting
+
+Imports are automatically organized in this order:
+
+1. **Node.js built-in modules** (`fs`, `path`, etc.)
+2. **External packages** (npm packages)
+3. **Vue ecosystem** (`vue`, `@vue/*`, `vite`)
+4. **Internal packages** (`@card-stack/*`)
+5. **Parent directory imports** (`../`)
+6. **Current directory imports** (`./`)
+7. **Type-only imports** (TypeScript types)
+
+### Language Overrides
+
+#### Vue Files
+
+```json
+{
+  "parser": "vue",
+  "vueIndentScriptAndStyle": true
+}
+```
+
+#### JSON Files
+
+```json
+{
+  "printWidth": 120,
+  "tabWidth": 2
+}
+```
+
+#### Markdown Files
+
+```json
+{
+  "printWidth": 80,
+  "proseWrap": "always",
+  "embeddedLanguageFormatting": "auto"
+}
+```
+
+## Usage
 
 ### Basic Setup
+
+```js
+// prettier.config.js
+import prettierConfig from "@card-stack/prettier-config"
+
+export default prettierConfig
+```
+
+### Package.json
 
 ```json
 {
@@ -31,142 +108,56 @@ pnpm add -D @card-stack/prettier-config
 }
 ```
 
-### Extended Configuration
+### With Custom Overrides
 
 ```js
-// prettier.config.js
-import baseConfig from '@card-stack/prettier-config'
+import prettierConfig from "@card-stack/prettier-config"
 
 export default {
-  ...baseConfig,
-  // Your overrides
+  ...prettierConfig,
+  // Your custom overrides
   printWidth: 120
 }
 ```
 
-### Package.json Configuration
+## Plugins
 
-```json
-{
-  "prettier": "@card-stack/prettier-config",
-  "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
-  }
-}
+This configuration includes:
+
+### @trivago/prettier-plugin-sort-imports
+
+- Intelligent import grouping and sorting
+- Configurable import order patterns
+- Duplicate import merging
+- TypeScript support
+
+### prettier-plugin-tailwindcss
+
+- Automatic Tailwind CSS class sorting
+- Consistent class order for better readability
+- Integration with Vue templates and JSX
+
+## Scripts
+
+### Format Check
+
+```bash
+pnpm prettier --check "**/*.{js,ts,vue,json,md}"
 ```
 
-## ⚙️ Configuration Details
+### Format Write
 
-### Core Formatting Rules
-
-```js
-{
-  // Use single quotes for strings
-  singleQuote: true,
-
-  // No semicolons for cleaner look
-  semi: false,
-
-  // 2-space indentation
-  tabWidth: 2,
-
-  // No trailing commas
-  trailingComma: 'none',
-
-  // 100 character line length
-  printWidth: 100,
-
-  // Space inside object literals
-  bracketSpacing: true,
-
-  // Always parentheses around arrow function parameters
-  arrowParens: 'always'
-}
+```bash
+pnpm prettier --write "**/*.{js,ts,vue,json,md}"
 ```
 
-### Import Sorting Configuration
+### Format Specific Files
 
-The configuration automatically sorts imports in this order:
-
-1. **Node.js built-ins** (`node:fs`, `node:path`)
-2. **External packages** (`vue`, `typescript`, etc.)
-3. **Internal packages** (`@card-stack/...`)
-4. **Relative imports** (`../`, `./`)
-5. **Type-only imports** (always last)
-
-Example:
-
-```ts
-import { validateCard } from '../utils'
-import type { LocalConfig } from './config'
-import { CardData } from './types'
-import { useCardStack } from '@card-stack/vue'
-import { readFile } from 'node:fs'
-import { computed, ref } from 'vue'
-import type { Component } from 'vue'
+```bash
+pnpm prettier --write src/**/*.vue
 ```
 
-### File-Specific Overrides
-
-#### JSON Files
-
-```json
-{
-  "singleQuote": false,
-  "trailingComma": "none"
-}
-```
-
-#### Markdown Files
-
-```js
-{
-  "printWidth": 80,
-  "proseWrap": "always",
-  "singleQuote": false
-}
-```
-
-#### Vue Files
-
-```js
-{
-  "printWidth": 100,
-  "singleAttributePerLine": true
-}
-```
-
-#### YAML Files
-
-```js
-{
-  "singleQuote": false,
-  "bracketSpacing": true
-}
-```
-
-## 🔧 Plugins
-
-### Import Sorting Plugin
-
-Automatically organizes and sorts imports:
-
-- Groups imports by source type
-- Adds blank lines between groups
-- Sorts specifiers within imports
-- Combines type and value imports when possible
-
-### Tailwind CSS Plugin
-
-Automatically sorts Tailwind CSS classes for consistency:
-
-```vue
-<!-- Before -->
-<div class="rounded-lg bg-blue-500 p-4 text-white shadow-md"></div>
-```
-
-## 📝 IDE Integration
+## IDE Integration
 
 ### VS Code
 
@@ -176,105 +167,47 @@ Add to your `.vscode/settings.json`:
 {
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
 ```
 
-### WebStorm/IntelliJ
+### Other IDEs
 
-1. Go to **Settings** → **Languages & Frameworks** → **JavaScript** → **Prettier**
-2. Set **Prettier package** to your node_modules path
-3. Check **On code reformat** and **On save**
+Most modern IDEs support Prettier with the configuration file automatically
+detected.
 
-## 🎨 Customization
+## File Types Supported
 
-### Overriding Settings
+- **JavaScript/TypeScript**: `.js`, `.ts`, `.mjs`, `.cjs`
+- **Vue**: `.vue` files with SFC support
+- **JSON**: `.json`, `.jsonc` with comment support
+- **Markdown**: `.md`, `.mdx` with prose wrapping
+- **YAML**: `.yml`, `.yaml` with proper indentation
+- **CSS/SCSS**: `.css`, `.scss`, `.sass`
 
-```js
-// prettier.config.js
-import baseConfig from '@card-stack/prettier-config'
+## Performance
 
-export default {
-  ...baseConfig,
-  printWidth: 120,
-  singleQuote: false,
-  // Custom import order
-  importOrder: ['^@core/(.*)$', '^@/(.*)$', '^[./]']
-}
-```
+The configuration is optimized for:
 
-### Project-Specific Rules
+- Fast formatting with minimal overhead
+- Efficient import sorting with caching
+- Language-specific optimizations
+- Monorepo-aware file handling
 
-```js
-// prettier.config.js
-import baseConfig from '@card-stack/prettier-config'
+## Contributing
 
-export default {
-  ...baseConfig,
-  overrides: [
-    {
-      files: '*.md',
-      options: {
-        printWidth: 120,
-        proseWrap: 'never'
-      }
-    }
-  ]
-}
-```
+When modifying the configuration:
 
-## 📋 Scripts
+1. Test with all supported file types
+2. Ensure compatibility with existing codebase
+3. Consider impact on import organization
+4. Update documentation for new features
 
-Add these scripts to your `package.json`:
+## License
 
-```json
-{
-  "scripts": {
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "format:staged": "prettier --write $(git diff --cached --name-only --diff-filter=ACMR | grep -E '\\.(js|jsx|ts|tsx|vue|json|md)$')"
-  }
-}
-```
-
-## 🔗 Dependencies
-
-- **Prettier 3.5+**: Core formatting engine
-- **@trivago/prettier-plugin-sort-imports**: Import sorting
-- **prettier-plugin-tailwindcss**: Tailwind CSS class sorting
-
-## 🚫 Ignore Files
-
-Create a `.prettierignore` file:
-
-```
-# Build outputs
-dist/
-build/
-.next/
-
-# Package managers
-node_modules/
-pnpm-lock.yaml
-
-# Generated files
-*.d.ts
-coverage/
-
-# Cache
-.turbo/
-.cache/
-```
-
-## 🤝 Contributing
-
-This configuration is part of the Vue Card Stack monorepo. Contributions should be made to the main repository.
-
-## 📄 License
-
-MIT License - see the main repository for details.
+MIT - See the main project license for details.
 
 ---
 

@@ -46,8 +46,9 @@
  * @version 1.0.0
  * @license MIT
  */
-import VueCardStack from './components/VueCardStack.vue'
 import type { App } from 'vue'
+
+import VueCardStack from './components/VueCardStack.vue'
 
 // Export all types for external use
 export * from './types'
@@ -86,13 +87,13 @@ export const VueCardStackPlugin = {
    * @param options - Optional configuration for the plugin
    */
   install: (app: App, options?: { componentName?: string }) => {
-    const componentName = options?.componentName || 'VueCardStack'
+    const componentName = options?.componentName ?? 'VueCardStack'
 
     try {
       app.component(componentName, VueCardStack)
     } catch (error) {
       console.error(`Failed to register ${componentName} component:`, error)
-      throw new Error(`VueCardStackPlugin installation failed: ${error}`)
+      throw new Error(`VueCardStackPlugin installation failed: ${String(error)}`)
     }
   }
 }
@@ -106,7 +107,7 @@ export const VueCardStackPlugin = {
  * app.use({ install })
  * ```
  */
-export const install = VueCardStackPlugin.install
+export const { install } = VueCardStackPlugin
 
 // Legacy browser support for Vue 2 compatibility (if needed)
 if (typeof window !== 'undefined') {

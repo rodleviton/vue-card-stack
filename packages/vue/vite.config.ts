@@ -1,31 +1,31 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import dts from "vite-plugin-dts";
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
   plugins: [
     vue(),
     dts({
-      insertTypesEntry: true,
-    }),
+      insertTypesEntry: true
+    })
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
-      name: "VueCardStack",
-      fileName: "index",
-      formats: ["es", "cjs"],
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'VueCardStack',
+      fileName: 'index',
+      formats: ['es', 'cjs']
     },
     cssCodeSplit: false,
     rollupOptions: {
-      external: ["vue"],
+      external: ['vue'],
       output: {
         globals: {
-          vue: "Vue",
+          vue: 'Vue'
         },
-        assetFileNames: "style.css",
-      },
-    },
-  },
-});
+        assetFileNames: 'style.css'
+      }
+    }
+  }
+})

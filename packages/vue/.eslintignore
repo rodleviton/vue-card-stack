@@ -1,0 +1,4 @@
+# Ignore build configuration files
+vite.config.ts
+*.config.ts
+*.config.js 

@@ -1,8 +1,3 @@
-import type { BaseCardData, CardStackConfig, DragEvent, InternalCard } from '../types'
-import { CARD_STACK_CONSTANTS } from '../types'
-import { debounce } from '../utils/debounce'
-import { useDragHandling } from './useDragHandling'
-import { useStackCalculations } from './useStackCalculations'
 import {
   type Ref,
   computed,
@@ -14,6 +9,18 @@ import {
   shallowRef,
   watchEffect
 } from 'vue'
+
+import {
+  type BaseCardData,
+  CARD_STACK_CONSTANTS,
+  type CardStackConfig,
+  type DragEvent,
+  type InternalCard
+} from '../types'
+import { debounce } from '../utils/debounce'
+
+import { useDragHandling } from './useDragHandling'
+import { useStackCalculations } from './useStackCalculations'
 
 /**
  * Main composable for card stack functionality with comprehensive state management.
@@ -162,10 +169,9 @@ export function useCardStack<T extends BaseCardData>(
   }
 
   /**
-   * Handle container resize events with optimized debouncing.
-   * Updates width and triggers rebuild for responsive behavior.
+   * Handle container resize logic with async operations.
    */
-  const handleResize = debounce(async () => {
+  const handleResizeAsync = async () => {
     try {
       if (elementRef.value) {
         const newWidth = elementRef.value.clientWidth
@@ -178,7 +184,16 @@ export function useCardStack<T extends BaseCardData>(
       error.value = err as Error
       console.error('Failed to handle resize:', err)
     }
-  }, CARD_STACK_CONSTANTS.RESIZE_DEBOUNCE_DELAY)
+  }
+
+  /**
+   * Handle container resize events with optimized debouncing.
+   * Updates width and triggers rebuild for responsive behavior.
+   */
+  const handleResize = debounce(
+    () => void handleResizeAsync(),
+    CARD_STACK_CONSTANTS.RESIZE_DEBOUNCE_DELAY
+  )
 
   /**
    * Move to the next card with smooth animation.
@@ -392,40 +407,48 @@ export function useCardStack<T extends BaseCardData>(
    */
   watchEffect(() => {
     if (cards.value && isInitialized.value) {
-      init().catch(console.error)
+      void init().catch(console.error)
     }
   })
 
+  // Create wrapper functions for proper event listener cleanup
+  const handleResizeWrapper = () => void handleResize()
+  const handleTouchEndWrapper = () => void onTouchEnd()
+
   // Lifecycle management with proper cleanup
-  onMounted(async () => {
-    try {
-      await init()
+  onMounted(() => {
+    void (async () => {
+      try {
+        await init()
 
-      // Set up event listeners
-      window.addEventListener('resize', handleResize, { passive: true })
+        // Set up event listeners
+        window.addEventListener('resize', handleResizeWrapper, { passive: true })
 
-      if (elementRef.value) {
-        elementRef.value.addEventListener(dragHandling.touchStartEvent.value, onTouchStart, {
-          passive: false
+        if (elementRef.value) {
+          elementRef.value.addEventListener(dragHandling.touchStartEvent.value, onTouchStart, {
+            passive: false
+          })
+        }
+
+        document.addEventListener(dragHandling.touchEndEvent.value, handleTouchEndWrapper, {
+          passive: true
         })
+      } catch (err) {
+        console.error('Failed to mount card stack:', err)
       }
-
-      document.addEventListener(dragHandling.touchEndEvent.value, onTouchEnd, { passive: true })
-    } catch (err) {
-      console.error('Failed to mount card stack:', err)
-    }
+    })()
   })
 
   onBeforeUnmount(() => {
     try {
       // Clean up all event listeners
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleResizeWrapper)
 
       if (elementRef.value) {
         elementRef.value.removeEventListener(dragHandling.touchStartEvent.value, onTouchStart)
       }
 
-      document.removeEventListener(dragHandling.touchEndEvent.value, onTouchEnd)
+      document.removeEventListener(dragHandling.touchEndEvent.value, handleTouchEndWrapper)
       document.removeEventListener(dragHandling.dragEvent.value, onDrag)
 
       // Cancel any pending debounced operations

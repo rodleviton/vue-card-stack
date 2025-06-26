@@ -1,23 +1,57 @@
 {
   "name": "@card-stack/prettier-config",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Modern Prettier configuration for the Card Stack monorepo with intelligent import sorting and multi-language support",
+  "keywords": [
+    "prettier",
+    "prettier-config",
+    "code-formatting",
+    "import-sorting",
+    "typescript",
+    "vue",
+    "javascript",
+    "json",
+    "markdown",
+    "yaml",
+    "tailwindcss",
+    "monorepo"
+  ],
+  "author": "ReactivePixels",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactivepixels/vue-card-stack.git",
+    "directory": "tooling/prettier"
+  },
+  "bugs": {
+    "url": "https://github.com/reactivepixels/vue-card-stack/issues"
+  },
+  "homepage": "https://github.com/reactivepixels/vue-card-stack#readme",
   "type": "module",
-  "main": "index.mjs",
-  "scripts": {
-    "clean": "rm -rf .turbo node_modules",
-    "format": "prettier --check \"**/*.{mjs,json}\"",
-    "typecheck": "tsc --noEmit"
+  "main": "./index.mjs",
+  "exports": {
+    ".": "./index.mjs",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "peerDependencies": {
+    "prettier": "^3.0.0"
   },
   "dependencies": {
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@vue/eslint-config-prettier": "^10.2.0",
-    "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.13"
   },
   "devDependencies": {
-    "@card-stack/tsconfig": "workspace:*",
-    "typescript": "^5.5.0"
+    "prettier": "^3.5.3"
   },
-  "prettier": "./index.mjs"
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -1,5 +1,6 @@
-import type { BaseCardData, CardStackConfig } from '../types'
 import { type Ref, computed, readonly, shallowRef, watchEffect } from 'vue'
+
+import type { BaseCardData, CardStackConfig } from '../types'
 
 /**
  * Composable for card stack calculations and positioning with optimized performance.
@@ -83,7 +84,7 @@ export function useStackCalculations<T extends BaseCardData>(
       }
 
       // For string values, use container width or fallback
-      const containerWidth = width.value || elementRef.value?.clientWidth || 0
+      const containerWidth = width.value ?? elementRef.value?.clientWidth ?? 0
       return Math.max(containerWidth, config.value.cardWidth)
     } catch (error) {
       console.error('Failed to calculate stack width:', error)
@@ -145,7 +146,7 @@ export function useStackCalculations<T extends BaseCardData>(
         return `${configStackWidth}px`
       }
 
-      return configStackWidth as string
+      return configStackWidth
     } catch (error) {
       console.error('Failed to calculate container width:', error)
       return `${config.value.cardWidth + config.value.paddingHorizontal * 2}px`

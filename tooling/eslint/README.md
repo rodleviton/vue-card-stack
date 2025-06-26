@@ -1,166 +1,149 @@
 # @card-stack/eslint-config
 
-Professional ESLint configuration for Vue Card Stack monorepo with TypeScript, Vue 3, and accessibility support.
+> Professional ESLint configuration for the Card Stack monorepo with modern best
+> practices.
 
-## 🎯 Features
+## Overview
 
-- **TypeScript-first**: Comprehensive TypeScript rules with strict type checking
-- **Vue 3 optimized**: Modern Vue development patterns and Composition API best practices
-- **Accessibility focused**: Built-in accessibility rules for inclusive UI components
-- **Performance oriented**: Rules optimized for library development and bundle size
-- **Security hardened**: Security-focused linting rules to prevent common vulnerabilities
-- **Monorepo ready**: Turbo-optimized configuration for monorepo development
-- **Modern standards**: ES2022+ syntax support with latest JavaScript features
+This package provides a comprehensive ESLint configuration that enforces modern
+JavaScript and TypeScript best practices, including Vue 3 Composition API
+patterns, type safety, performance optimizations, and accessibility standards.
 
-## 📦 Installation
+## Features
 
-This package is part of the Vue Card Stack monorepo and is used internally. For external projects, you can use it as a reference or fork it.
+### 🚀 **Modern Standards**
 
-```bash
-# If using in an external project
-pnpm add -D @card-stack/eslint-config
-```
+- ES2022+ support with latest ECMAScript features
+- TypeScript strict mode with enhanced type checking
+- Vue 3 Composition API optimization rules
+- Performance-focused linting rules
 
-## 🚀 Usage
+### 🛡️ **Quality Assurance**
 
-### Base Configuration (TypeScript/JavaScript)
+- Security-focused rules to prevent vulnerabilities
+- Import/export optimization and organization
+- Accessibility (a11y) enforcement for Vue templates
+- Consistent code style complementing Prettier
 
-```js
-// eslint.config.js
-import baseConfig from '@card-stack/eslint-config/base'
+### ⚡ **Performance Optimized**
 
-export default baseConfig
-```
+- Type-aware linting with project references
+- Efficient caching with named configurations
+- Optimized ignore patterns for better performance
 
-### Vue Configuration (TypeScript + Vue)
+## Configurations
 
-```js
-// eslint.config.js
-import vueConfig from '@card-stack/eslint-config/vue'
+### Base Configuration (`base.js`)
 
-export default vueConfig
-```
-
-### Custom Extension
+Provides foundation for JavaScript and TypeScript projects:
 
 ```js
-// eslint.config.js
-import baseConfig from '@card-stack/eslint-config/base'
-import typescriptEslint from 'typescript-eslint'
+import eslintConfigBase from "@card-stack/eslint-config/base.js"
 
-export default typescriptEslint.config(...baseConfig, {
-  // Your custom rules
-  rules: {
-    'your-custom-rule': 'error'
-  }
-})
+export default [...eslintConfigBase]
 ```
 
-## 🔧 Configurations
+**Features:**
 
-### Base Configuration
+- TypeScript strict rules with type-aware linting
+- Modern ES2022+ JavaScript patterns
+- Security and performance rules
+- Import/export optimization
+- Consistent code style enforcement
 
-The base configuration provides:
+### Vue Configuration (`vue.js`)
 
-- **TypeScript Support**: Comprehensive TypeScript rules and type checking
-- **Modern JavaScript**: ES2022+ syntax and features
-- **Code Quality**: Strict rules for maintainable and readable code
-- **Performance**: Rules focused on runtime performance and bundle optimization
-- **Security**: Protection against common security vulnerabilities
-- **Import Management**: Organized import sorting and validation
+Extends base configuration with Vue 3 specific rules:
 
-### Vue Configuration
+```js
+import eslintConfigVue from "@card-stack/eslint-config/vue.js"
 
-The Vue configuration extends the base with:
+export default [...eslintConfigVue]
+```
 
-- **Vue 3 Patterns**: Composition API and script setup best practices
-- **Template Rules**: Vue template accessibility and performance optimization
-- **Component Standards**: Consistent component naming and structure
-- **Reactivity Rules**: Proper reactive patterns and ref handling
-- **Accessibility**: ARIA attributes and screen reader support
+**Features:**
 
-## 📋 Rule Categories
+- Vue 3 Composition API best practices
+- Script setup and `<script setup>` optimization
+- Template accessibility (a11y) rules
+- Vue SFC (Single File Component) standards
+- TypeScript integration for Vue components
+
+## Usage
+
+### Basic Setup
+
+```js
+// eslint.config.mjs
+import eslintConfigBase from "@card-stack/eslint-config/base.js"
+import eslintConfigVue from "@card-stack/eslint-config/vue.js"
+
+export default [...eslintConfigBase, ...eslintConfigVue]
+```
+
+### Package-Specific Configuration
+
+For TypeScript-only packages:
+
+```js
+import eslintConfigBase from "@card-stack/eslint-config/base.js"
+
+export default [...eslintConfigBase]
+```
+
+For Vue packages:
+
+```js
+import eslintConfigVue from "@card-stack/eslint-config/vue.js"
+
+export default [...eslintConfigVue]
+```
+
+## Rule Categories
 
 ### TypeScript Rules
 
-- Strict type checking with `@typescript-eslint/strict`
-- Enhanced type safety with optional chaining and nullish coalescing
-- Performance-focused async/await patterns
-- Proper error handling and promise management
+- **Type Safety**: Strict type checking and null safety
+- **Modern Patterns**: Optional chaining, nullish coalescing
+- **Import Management**: Consistent type imports and exports
+- **Performance**: Async/await best practices
 
 ### Vue Rules
 
-- Composition API best practices
-- Template accessibility enforcement
-- Performance optimization patterns
-- Component lifecycle management
-- Reactive data handling
+- **Composition API**: Script setup optimization
+- **Accessibility**: Template a11y enforcement
+- **Performance**: Reactive patterns and watchers
+- **Code Quality**: Component naming and structure
 
-### Code Quality Rules
+### JavaScript Rules
 
-- Consistent formatting (integrated with Prettier)
-- Performance-focused patterns
-- Security vulnerability prevention
-- Import organization and optimization
+- **Security**: Prevention of dangerous patterns
+- **Performance**: Optimization recommendations
+- **Consistency**: Code style and formatting
+- **Modern ES**: Latest ECMAScript features
 
-## 🎛️ Customization
+## Dependencies
 
-### Disabling Rules
+This configuration includes:
 
-```js
-export default typescriptEslint.config(...baseConfig, {
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'off',
-    'vue/require-default-prop': 'off'
-  }
-})
-```
+- `@eslint/js` - Core ESLint rules
+- `typescript-eslint` - TypeScript-specific rules
+- `eslint-plugin-vue` - Vue.js specific rules
+- `eslint-config-turbo` - Turbo monorepo optimization
+- `eslint-config-prettier` - Prettier integration
 
-### Adding Custom Rules
+## Contributing
 
-```js
-export default typescriptEslint.config(...baseConfig, {
-  rules: {
-    'prefer-const': 'error',
-    'no-var': 'error'
-  }
-})
-```
+When adding new rules:
 
-### File-Specific Overrides
+1. Consider performance impact
+2. Ensure rules align with project goals
+3. Test with existing codebase
+4. Document rule purpose and benefits
 
-```js
-export default typescriptEslint.config(...baseConfig, {
-  files: ['**/*.test.ts'],
-  rules: {
-    '@typescript-eslint/no-explicit-any': 'off'
-  }
-})
-```
+## License
 
-## 🔗 Dependencies
-
-- **ESLint 9.0+**: Modern flat config system
-- **TypeScript ESLint**: Enhanced TypeScript support
-- **Vue ESLint Plugin**: Vue 3 specific rules
-- **ESLint Config Prettier**: Prettier integration
-- **ESLint Config Turbo**: Monorepo optimization
-
-## 📖 Rule Documentation
-
-For detailed information about specific rules:
-
-- [TypeScript ESLint Rules](https://typescript-eslint.io/rules/)
-- [Vue ESLint Rules](https://eslint.vuejs.org/rules/)
-- [ESLint Core Rules](https://eslint.org/docs/rules/)
-
-## 🤝 Contributing
-
-This configuration is part of the Vue Card Stack monorepo. Contributions should be made to the main repository.
-
-## 📄 License
-
-MIT License - see the main repository for details.
+MIT - See the main project license for details.
 
 ---
 
