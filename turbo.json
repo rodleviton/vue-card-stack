@@ -2,6 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": ["**/.env"],
   "ui": "stream",
+  "globalEnv": ["NODE_ENV"],
   "tasks": {
     "topo": {
       "dependsOn": ["^topo"]
