@@ -21,6 +21,7 @@
     "@card-stack/tsconfig": "workspace:*",
     "@eslint/js": "^9.29.0",
     "eslint": "^9.27.0",
+    "eslint-config-prettier": "^9.1.0",
     "globals": "^16.2.0",
     "typescript": "^5.5.0",
     "vue-eslint-parser": "^10.1.4"

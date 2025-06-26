@@ -1,37 +1,29 @@
-import pluginVue from 'eslint-plugin-vue'
-import globals from 'globals'
+import baseConfig from './base.js'
+import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginVue from 'eslint-plugin-vue'
+import typescriptEslint from 'typescript-eslint'
 
-export default [
-  ...pluginVue.configs['flat/recommended'],
+export default typescriptEslint.config(
+  ...baseConfig.map((config) => {
+    if (config.files) {
+      return {
+        ...config,
+        files: [...config.files, '**/*.vue']
+      }
+    }
+    return config
+  }),
   {
     files: ['**/*.vue'],
-    plugins: {
-      vue: pluginVue
-    },
-    rules: {
-      'vue/no-unused-vars': 'error',
-      'vue/script-setup-uses-vars': 'error',
-      'vue/no-unused-components': 'error',
-      'vue/component-name-in-template-casing': ['error', 'PascalCase'],
-      'vue/multi-word-component-names': 'error',
-      // Disable formatting rules that conflict with Prettier
-      'vue/html-indent': 'off',
-      'vue/html-closing-bracket-newline': 'off',
-      'vue/max-attributes-per-line': 'off',
-      'vue/multiline-html-element-content-newline': 'off',
-      'vue/singleline-html-element-content-newline': 'off',
-      'vue/html-self-closing': 'off'
-    },
+    extends: [...eslintPluginVue.configs['flat/recommended'], eslintConfigPrettier],
     languageOptions: {
-      parser: pluginVue.parser,
       parserOptions: {
-        parser: '@typescript-eslint/parser',
-        sourceType: 'module',
-        ecmaVersion: 'latest'
-      },
-      globals: {
-        ...globals.browser
+        parser: typescriptEslint.parser,
+        extraFileExtensions: ['.vue'],
+        ecmaFeatures: {
+          jsx: true
+        }
       }
     }
   }
-]
+)

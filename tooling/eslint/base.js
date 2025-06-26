@@ -1,21 +1,25 @@
 import eslint from '@eslint/js'
+import eslintConfigPrettier from 'eslint-config-prettier'
 import turboConfig from 'eslint-config-turbo/flat'
 import globals from 'globals'
-import tsEslint from 'typescript-eslint'
+import typescriptEslint from 'typescript-eslint'
 
-export default tsEslint.config(
-  eslint.configs.recommended,
-  ...tsEslint.configs.recommended,
-  turboConfig,
+export default typescriptEslint.config(
   {
+    ignores: ['**/node_modules', '*.d.ts', '**/coverage', '**/dist', 'pnpm-lock.yaml']
+  },
+  {
+    extends: [eslint.configs.recommended, ...typescriptEslint.configs.recommended, ...turboConfig],
+    files: ['**/*.{js,ts}'],
     languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
       globals: {
         ...globals.browser,
         ...globals.es2021
       },
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module'
+        parser: typescriptEslint.parser
       }
     },
     rules: {
@@ -25,7 +29,5 @@ export default tsEslint.config(
       '@typescript-eslint/explicit-module-boundary-types': 'off'
     }
   },
-  {
-    ignores: ['**/node_modules', 'dist', 'pnpm-lock.yaml']
-  }
+  eslintConfigPrettier
 )

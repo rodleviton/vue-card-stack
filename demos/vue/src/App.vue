@@ -1,75 +1,63 @@
 <script setup lang="ts">
-  import { createVueCardStack } from '@card-stack/vue'
-  import { ref } from 'vue'
-  import type { CardData } from './types'
+import type { CardData } from './types'
+import { createVueCardStack } from '@card-stack/vue'
+import { ref } from 'vue'
 
-  // Create a strongly typed component for our CardData
-  const VueCardStack = createVueCardStack<CardData>()
+// Create a strongly typed component for our CardData
+const VueCardStack = createVueCardStack<CardData>()
 
-  const cards = ref<CardData[]>([
-    { background: '#00659d' },
-    { background: '#00abbc' },
-    { background: '#e2c58a', title: 'Card 1' },
-    { background: '#fc8890' },
-    { background: '#b35d7f' },
-    { background: '#00659d' },
-    { background: '#00abbc' },
-    { background: '#e2c58a' },
-    { background: '#fc8890' },
-    { background: '#b35d7f' },
-    { background: '#00659d' },
-    { background: '#00abbc' },
-    { background: '#e2c58a' },
-    { background: '#fc8890' },
-    { background: '#b35d7f' }
-  ])
+const cards = ref<CardData[]>([
+  { background: '#00659d' },
+  { background: '#00abbc' },
+  { background: '#e2c58a', title: 'Card 1' },
+  { background: '#fc8890' },
+  { background: '#b35d7f' },
+  { background: '#00659d' },
+  { background: '#00abbc' },
+  { background: '#e2c58a' },
+  { background: '#fc8890' },
+  { background: '#b35d7f' },
+  { background: '#00659d' },
+  { background: '#00abbc' },
+  { background: '#e2c58a' },
+  { background: '#fc8890' },
+  { background: '#b35d7f' }
+])
 
-  const onMove = (value: number) => {
-    console.log('Card moving:', value)
-  }
+const onMove = (value: number) => {
+  console.log('Card moving:', value)
+}
 </script>
 
 <template>
-
   <div class="app">
-
     <h1>Vue Card Stack Demo</h1>
-     <VueCardStack
+    <VueCardStack
       :cards="cards"
       :stack-width="460"
       :card-width="300"
       :card-height="460"
       :max-visible-cards="6"
       @move="onMove"
-      > <template #card="{ card }"
-        >
-        <div class="card" :style="{ background: card.data.background }">
-
-          <p v-if="card.data.title"> {{ card.data.title }} </p>
-
-        </div>
-         </template
-      > <template #nav="{ activeCardIndex, onNext, onPrevious }"
-        >
-        <nav class="nav">
-
-          <div class="counter"> {{ (activeCardIndex ?? 0) + 1 }}/{{ cards.length }} </div>
-           <button class="button" @click="onPrevious"> Previous </button> <button
-            class="button"
-            @click="onNext"
-          >
-             Next </button
-          >
-        </nav>
-         </template
-      > </VueCardStack
     >
+      <template #card="{ card }">
+        <div class="card" :style="{ background: card.data.background }">
+          <p v-if="card.data.title">{{ card.data.title }}</p>
+        </div>
+      </template>
+      <template #nav="{ activeCardIndex, onNext, onPrevious }">
+        <nav class="nav">
+          <div class="counter">{{ (activeCardIndex ?? 0) + 1 }}/{{ cards.length }}</div>
+          <button class="button" @click="onPrevious">Previous</button>
+          <button class="button" @click="onNext">Next</button>
+        </nav>
+      </template>
+    </VueCardStack>
   </div>
-
 </template>
 
 <style>
-  .app {
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,4 +109,3 @@
   background: #444;
 }
 </style>
-
