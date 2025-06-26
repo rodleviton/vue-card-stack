@@ -1,0 +1,48 @@
+{
+  "name": "@card-stack/vue",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
+    "format:fix": "prettier --write \"src/**/*.{ts,tsx,vue,js,jsx,json,css,scss}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@card-stack/eslint-config": "workspace:*",
+    "@card-stack/prettier-config": "workspace:*",
+    "@types/node": "^22.13.14",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^1.0.0",
+    "vue": "^3.4.0",
+    "vue-tsc": "^2.2.10"
+  },
+  "prettier": "@card-stack/prettier-config"
+}

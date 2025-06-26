@@ -1,0 +1,51 @@
+{
+  "name": "@card-stack/tsconfig",
+  "version": "1.0.0",
+  "description": "Modern TypeScript configuration for the Card Stack monorepo with strict type safety and performance optimizations",
+  "keywords": [
+    "typescript",
+    "tsconfig",
+    "typescript-config",
+    "vue",
+    "vue3",
+    "strict-mode",
+    "type-safety",
+    "es2022",
+    "jsx",
+    "monorepo",
+    "performance",
+    "incremental"
+  ],
+  "author": "ReactivePixels",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactivepixels/vue-card-stack.git",
+    "directory": "tooling/typescript"
+  },
+  "bugs": {
+    "url": "https://github.com/reactivepixels/vue-card-stack/issues"
+  },
+  "homepage": "https://github.com/reactivepixels/vue-card-stack#readme",
+  "exports": {
+    "./base.json": "./base.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "base.json",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
