@@ -12,7 +12,7 @@ importers:
         specifier: ^0.23.0
         version: 0.23.0
       '@trivago/prettier-plugin-sort-imports':
-        specifier: 5.2.2
+        specifier: ^5.2.2
         version: 5.2.2(@vue/compiler-sfc@3.5.17)(prettier@3.6.1)
       '@turbo/gen':
         specifier: ^2.5.4
@@ -164,7 +164,7 @@ importers:
   tooling/prettier:
     dependencies:
       '@trivago/prettier-plugin-sort-imports':
-        specifier: 5.2.2
+        specifier: ^5.2.2
         version: 5.2.2(@vue/compiler-sfc@3.5.17)(prettier@3.6.1)
       '@vue/eslint-config-prettier':
         specifier: ^10.2.0
