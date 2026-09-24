@@ -11,7 +11,11 @@ features, fixes and releases will land there, not here.
   (every prop mapped, with a worked before/after)
 
 ```bash
-npm install @rpxl/riffle-vue
+npm install @rpxl/riffle
+```
+
+```ts
+import { Riffle } from '@rpxl/riffle/vue'
 ```
 
 ---
