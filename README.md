@@ -1,6 +1,20 @@
-# Project Status: 🚨 Unmaintained 🚨
+# vue-card-stack is retired: use Riffle
 
-This project is no longer actively maintained. I will not be accepting pull requests, addressing issues, nor making future releases. I have plans to revisit this project in the future but it will likely become a multi-framework project under a different repo name. 🕊️
+`vue-card-stack` has been retired in favor of **[Riffle](https://reactivepixels.github.io/riffle)**,
+its framework-agnostic successor. Riffle keeps the same card-and-slot shape you know from
+`vue-card-stack`, adds a real vanilla core so it isn't tied to one framework, ships a Vue
+adapter that mirrors this component's API, and adds a React adapter alongside it. New
+features, fixes and releases will land there, not here.
+
+- **Docs, API reference and live demo:** https://reactivepixels.github.io/riffle
+- **Migrating from vue-card-stack:** https://reactivepixels.github.io/riffle/migration/
+  (every prop mapped, with a worked before/after)
+
+```bash
+npm install @rpxl/riffle-vue
+```
+
+---
 
 <p align="center">
   <a href="https://github.com/rodleviton/vue-card-stack/" target="_blank">
@@ -13,6 +27,13 @@ This project is no longer actively maintained. I will not be accepting pull requ
 ![CI](https://github.com/rodleviton/vue-card-stack/workflows/CI/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/rodleviton/vue-card-stack/blob/master/LICENSE)
 [![Mentioned in Awesome Awesome Vue](https://awesome.re/mentioned-badge.svg)](https://github.com/vuejs/awesome-vue)
+
+> ## 🚨 Legacy: unmaintained
+>
+> The API docs below are kept for existing users of the published `vue-card-stack`
+> package. This project is no longer actively maintained: no new pull requests, issues
+> or releases. See [above](#vue-card-stack-is-retired-use-riffle) for the maintained
+> replacement.
 
 ## Install
 
@@ -71,7 +92,7 @@ export default {
 | **stackWidth**        | `[Number:String]` | `cardWidth + paddingHorizontal` | Width of card stack in pixels or as a percentage (responsive).                                     |
 | **sensitivity**       | `Number`          |             `0.25`              | Distance card must travel as percentage of `cardWidth` + `paddingHorizontal`.                      |
 | **maxVisibleCards**   | `Number`          |              `10`               | Number of cards that will be visible at any one time.                                              |
-| **scaleMultiplier**   | `Number`          |             `0.75`              | A number between `0` and `1` that determines how much a card scales as it moved through the stack. |
+| **scaleMultiplier**   | `Number`          |              `0.5`              | A number between `0` and `1` that determines how much a card scales as it moved through the stack. |
 | **speed**             | `Number`          |              `0.2`              | Duration in milliseconds for card swipe transition.                                                |
 | **paddingHorizontal** | `Number`          |              `20`               | A gutter size in pixels that will be applied to left and right hand side of card stack.            |
 | **paddingVertical**   | `Number`          |              `20`               | A gutter size in pixels that will be applied to top and bottom of card stack.                      |
