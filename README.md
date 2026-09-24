@@ -7,7 +7,7 @@ adapter that mirrors this component's API, and adds a React adapter alongside it
 features, fixes and releases will land there, not here.
 
 - **Docs, API reference and live demo:** https://reactivepixels.github.io/riffle
-- **Migrating from vue-card-stack:** https://reactivepixels.github.io/riffle/migration/
+- **Migrating from vue-card-stack:** https://reactivepixels.github.io/riffle/vue/migration/
   (every prop mapped, with a worked before/after)
 
 ```bash
